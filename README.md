@@ -1,5 +1,7 @@
 # XcodeSize
 
+[Website](https://everettjf.github.io/xcodesize/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodesize-v1.0.0) · [Apache 2.0](LICENSE)
+
 A native macOS storage browser for understanding and cleaning Xcode's footprint. SwiftUI, AppKit and Foundation; no third-party runtime dependencies. English by default, with Simplified Chinese, Traditional Chinese, Japanese, Korean, and a Follow System option in Settings → Language.
 
 ## Install
@@ -8,7 +10,7 @@ A native macOS storage browser for understanding and cleaning Xcode's footprint.
 brew install --cask everettjf/tap/xcodesize
 ```
 
-[Download and release notes](https://github.com/everettjf/homebrew-tap/releases?q=xcodesize&expanded=true). Release binaries are distributed through the public tap; this does not change the source repository’s visibility.
+[Download and release notes](https://github.com/everettjf/homebrew-tap/releases?q=xcodesize&expanded=true). Source code is public under Apache 2.0. Release binaries are distributed through the Homebrew tap.
 
 Requires macOS 14 or later. The release application supports Apple Silicon and Intel, is signed with Developer ID, and is notarized by Apple. Homebrew updates are available with `brew upgrade --cask xcodesize`.
 
@@ -106,3 +108,17 @@ open build/Build/Products/Debug/XcodeSize.app --args --ui-fixture
 `scripts/build-release.sh` runs the tests, builds both CPU architectures, signs with Developer ID and hardened runtime, submits to Apple, staples the ticket, and verifies the exact app extracted from the final ZIP. It writes `dist/<version>/XcodeSize-<version>.zip` and `SHA256SUMS`; it does not publish anything.
 
 Provide a `NOTARY_KEYCHAIN_PROFILE`, or `APPLE_ID`, `APPLE_TEAM_ID`, and `APPLE_SPECIFIC_PASSWORD` in the environment. `SIGNING_IDENTITY` can select a particular Developer ID identity; otherwise the first available Developer ID Application identity is used. Never commit credentials. Release versions come from `MARKETING_VERSION` in the Xcode project. The Homebrew cask is mirrored under `packaging/homebrew/Casks/xcodesize.rb`.
+
+## Website
+
+The product website is a dependency-free static site in `web/`. GitHub Actions deploys only that directory to GitHub Pages when its contents change on `main`. To preview locally:
+
+```sh
+python3 -m http.server 8080 --directory web
+```
+
+The interactive product preview uses illustrative data; it never scans a visitor’s computer. The website loads no third-party scripts, fonts, or analytics.
+
+## License
+
+Copyright 2026 XcodeSize contributors. Licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) for attribution.

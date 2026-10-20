@@ -30,6 +30,7 @@ xcodebuild -project XcodeSize/XcodeSize.xcodeproj -scheme XcodeSize \
 app="$release_dir/XcodeSize.app"
 ditto "$root/build/distribution/Build/Products/Release/XcodeSize.app" "$app"
 cp LICENSE "$app/Contents/Resources/LICENSE"
+cp NOTICE "$app/Contents/Resources/NOTICE"
 codesign --force --options runtime --timestamp --sign "$signing_identity" "$app"
 codesign --verify --deep --strict "$app"
 lipo "$app/Contents/MacOS/XcodeSize" -verify_arch arm64
