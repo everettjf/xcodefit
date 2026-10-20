@@ -1,6 +1,6 @@
 # XcodeSize
 
-[Website](https://everettjf.github.io/xcodesize/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodesize-v1.0.0) · [Apache 2.0](LICENSE)
+[Website](https://xnu.app/xcodesize/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodesize-v1.0.0) · [Apache 2.0](LICENSE)
 
 A native macOS storage browser for understanding and cleaning Xcode's footprint. SwiftUI, AppKit and Foundation; no third-party runtime dependencies. English by default, with Simplified Chinese, Traditional Chinese, Japanese, Korean, and a Follow System option in Settings → Language.
 
