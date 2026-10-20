@@ -51,14 +51,13 @@ enum StorageCategory: String, CaseIterable, Codable, Sendable, Identifiable {
 }
 
 enum CleanupTier: Int, CaseIterable, Codable, Sendable, Identifiable {
-    case simple = 0, regular, deep
+    case regular = 1, deep = 2
     var id: Int { rawValue }
-    var title: String { switch self { case .simple: L10n.text("Quick Clean"); case .regular: L10n.text("Standard Clean"); case .deep: L10n.text("Deep Clean") } }
-    var symbol: String { switch self { case .simple: "sparkles"; case .regular: "slider.horizontal.3"; case .deep: "square.stack.3d.down.right" } }
+    var title: String { switch self { case .regular: L10n.text("Standard Clean"); case .deep: L10n.text("Deep Clean") } }
+    var symbol: String { switch self { case .regular: "slider.horizontal.3"; case .deep: "square.stack.3d.down.right" } }
     var subtitle: String {
         switch self {
-        case .simple: L10n.text("Rebuild caches. Retire old logs.")
-        case .regular: L10n.text("Also clean idle builds and dependencies.")
+        case .regular: L10n.text("Caches, old logs, and idle builds. Release symbols stay safe.")
         case .deep: L10n.text("Also choose archives, devices, and old tools.")
         }
     }
@@ -90,6 +89,10 @@ struct Measurement: Codable, Sendable {
     var hardLinks: Int = 0
     var identity: FileIdentity?
     var cancelled: Bool = false
+    var containsReleaseSymbols: Bool = false
+    var containsWorkingCopies: Bool = false
+    var symbolBytes: Int64 = 0
+    var productBytes: Int64 = 0
 }
 
 struct StorageItem: Identifiable, Codable, Sendable {
@@ -111,6 +114,8 @@ struct StorageItem: Identifiable, Codable, Sendable {
     var subtitle: String = ""
     var retainedDeviceSupport: Bool = false
     var projectDataRoot: URL?
+    var archive: ArchiveMetadata?
+    var requiresDeepCleanup: Bool { category == .archives || category == .previews || category == .simulators || measurement.containsReleaseSymbols || measurement.containsWorkingCopies || (category == .packages && manualOnly) }
     var size: Int64 { measurement.allocated }
     var protectionPath: String { projectDataRoot?.path ?? id }
     var complete: Bool { measurement.unreadable == 0 && !measurement.cancelled }
@@ -168,6 +173,7 @@ enum CleanupPolicy {
         if let reason = item.blockedReason { return reason }
         if !item.complete { return L10n.text("The scan is incomplete; not all files can be verified.") }
         if item.action == .readOnly { return L10n.text("This item is read-only.") }
+        if tier == .regular && item.requiresDeepCleanup { return L10n.text("Switch to %@", CleanupTier.deep.title) }
         if tier.rawValue < item.minimumTier.rawValue { return L10n.text("Switch to %@", String(describing: (item.minimumTier.title))) }
         if protectedPaths.contains(where: { PathRules.contains($0, item.url.path) || PathRules.contains(item.url.path, $0) }) { return L10n.text("This location is protected.") }
         if environment.toolsBusy { return L10n.text("Xcode or development tools are running.") }
@@ -183,7 +189,7 @@ enum CleanupPolicy {
         return nil
     }
     static func recommended(_ item: StorageItem, tier: CleanupTier, settings: CleanupSettings, protectedPaths: Set<String>, environment: ToolEnvironment, now: Date = Date()) -> Bool {
-        guard blockReason(item, tier: tier, protectedPaths: protectedPaths, environment: environment) == nil, !item.manualOnly else { return false }
+        guard blockReason(item, tier: tier, protectedPaths: protectedPaths, environment: environment) == nil, !item.manualOnly, !item.requiresDeepCleanup else { return false }
         let age = now.timeIntervalSince(item.date ?? now) / 86400
         switch item.category {
         case .caches: return true

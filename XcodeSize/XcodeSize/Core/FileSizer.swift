@@ -12,6 +12,9 @@ enum FileSizer {
         let sizeKeys: Set<URLResourceKey> = [.totalFileAllocatedSizeKey, .totalFileSizeKey]
         func add(_ entry: URL, _ info: stat) {
             let path = entry.path
+            let relative = String(path.dropFirst(url.path.count)).split(separator: "/").map(String.init)
+            if entry.lastPathComponent == "checkouts" { result.containsWorkingCopies = true }
+            if entry.pathExtension == "dSYM" || entry.pathExtension == "xcarchive" || entry.lastPathComponent == "BCSymbolMaps" { result.containsReleaseSymbols = true }
             result.files += 1
             let date = Date(timeIntervalSince1970: Double(info.st_mtimespec.tv_sec) + Double(info.st_mtimespec.tv_nsec) / 1e9)
             result.newestModification = max(result.newestModification ?? .distantPast, date)
@@ -25,7 +28,10 @@ enum FileSizer {
                 // st_blocks omits compressed resource forks on macOS. Foundation's total
                 // sizes include those forks. Never request target properties for a link.
                 let resources = (info.st_mode & S_IFMT) == S_IFLNK ? nil : try? entry.resourceValues(forKeys: sizeKeys)
-                result.allocated += resources?.totalFileAllocatedSize.map(Int64.init) ?? Int64(info.st_blocks) * 512
+                let allocated = resources?.totalFileAllocatedSize.map(Int64.init) ?? Int64(info.st_blocks) * 512
+                result.allocated += allocated
+                if relative.first == "dSYMs" || relative.first == "BCSymbolMaps" { result.symbolBytes += allocated }
+                else if relative.first == "Products" { result.productBytes += allocated }
                 result.logical += resources?.totalFileSize.map(Int64.init) ?? Int64(info.st_size)
             } else { result.hardLinks += 1 }
         }
@@ -35,7 +41,10 @@ enum FileSizer {
         guard let enumerator = fm.enumerator(at: url, includingPropertiesForKeys: Array(sizeKeys), options: [], errorHandler: { _, _ in result.unreadable += 1; return true }) else {
             result.unreadable += 1; return result
         }
-        for case let child as URL in enumerator {
+        for case let enumerated as URL in enumerator {
+            // Foundation can expand /var to /private/var during enumeration. Keep
+            // every child in the root's spelling so exclusions and breakdowns agree.
+            let child = url.appendingPathComponent(enumerated.pathComponents.suffix(enumerator.level).joined(separator: "/"))
             if Task.isCancelled { result.cancelled = true; break }
             var info = stat()
             guard lstat(child.path, &info) == 0 else { result.unreadable += 1; continue }
@@ -53,6 +62,7 @@ enum FileSizer {
         return result
     }
     static func measure(_ url: URL) -> Measurement { var seen = Set<FileIdentity>(); return measure(url, seen: &seen) }
+    static func measureIdentity(_ url: URL) -> FileIdentity? { var info = stat(); return lstat(url.path, &info) == 0 ? identity(info) : nil }
     static func identity(_ info: stat) -> FileIdentity { FileIdentity(device: UInt64(info.st_dev), inode: UInt64(info.st_ino)) }
     static func isSymlink(_ url: URL) -> Bool { var s = stat(); return lstat(url.path, &s) != 0 || (s.st_mode & S_IFMT) == S_IFLNK }
     static func fileSystemType(_ url: URL) -> String? {

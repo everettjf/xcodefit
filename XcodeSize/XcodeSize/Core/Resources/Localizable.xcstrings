@@ -10584,6 +10584,978 @@
         }
       },
       "generatesSymbol": false
+    },
+    "Caches, old logs, and idle builds. Release symbols stay safe.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caches, old logs, and idle builds. Release symbols stay safe."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存、旧日志及闲置构建，保留发布符号。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快取、舊日誌及閒置建置，保留發佈符號。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャッシュ、古いログ、未使用のビルド。リリースシンボルは保持。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "캐시, 오래된 로그, 유휴 빌드. 릴리스 심볼은 보존합니다."
+          }
+        }
+      }
+    },
+    "Standard or Deep. Review every cleanup before it runs.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard or Deep. Review every cleanup before it runs."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "常规或深度，每次清理前均可审阅。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般或深度，每次清理前均可檢閱。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "標準または詳細。実行前に毎回確認できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표준 또는 심층. 실행 전 모든 정리 내용을 검토합니다."
+          }
+        }
+      }
+    },
+    "Manage Archives…": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage Archives…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理归档…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理封存檔…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブを管理…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아카이브 관리…"
+          }
+        }
+      }
+    },
+    "Archive Retention": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archive Retention"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "归档保留"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "封存檔保留"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブの保持"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아카이브 보존"
+          }
+        }
+      }
+    },
+    "Each released build needs its own matching symbols. Keep every distributed build you still support. Upload and backup status are unknown.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each released build needs its own matching symbols. Keep every distributed build you still support. Upload and backup status are unknown."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每个已发布构建均需对应的符号。请保留仍受支持的所有发布构建。未验证上传或备份状态。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每個已發佈建置均需對應的符號。請保留仍受支援的所有發佈建置。未驗證上傳或備份狀態。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリースした各ビルドに対応するシンボルが必要です。サポート中の配布ビルドをすべて保持してください。アップロードやバックアップの状態は未確認です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배포한 각 빌드에는 일치하는 심볼이 필요합니다. 지원 중인 모든 배포 빌드를 보존하세요. 업로드 및 백업 상태는 확인되지 않았습니다."
+          }
+        }
+      }
+    },
+    "Retention Rule": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retention Rule"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留规则"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留規則"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保持ルール"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보존 규칙"
+          }
+        }
+      }
+    },
+    "Keep latest %@ versions": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep latest %@ versions"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留最新 %@ 个版本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留最新 %@ 個版本"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最新の %@ バージョンを保持"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최신 버전 %@개 보존"
+          }
+        }
+      }
+    },
+    "Remove all unprotected archives": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove all unprotected archives"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除所有未受保护的归档"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除所有未受保護的封存檔"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保護されていないアーカイブをすべて削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보호되지 않은 모든 아카이브 제거"
+          }
+        }
+      }
+    },
+    "All unprotected archives, including unknown versions, will be selected. After Trash is emptied, their release symbols may be unrecoverable.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All unprotected archives, including unknown versions, will be selected. After Trash is emptied, their release symbols may be unrecoverable."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将选择所有未受保护的归档，包括未知版本。清空废纸篓后，对应的发布符号可能无法恢复。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "將選擇所有未受保護的封存檔，包括未知版本。清空垃圾桶後，對應的發佈符號可能無法復原。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不明なバージョンを含む、保護されていないすべてのアーカイブを選択します。ゴミ箱を空にすると、リリースシンボルを復元できなくなる場合があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알 수 없는 버전을 포함한 보호되지 않은 모든 아카이브가 선택됩니다. 휴지통을 비우면 릴리스 심볼을 복구하지 못할 수 있습니다."
+          }
+        }
+      }
+    },
+    "Grouped by app, platform, and signing team. All builds of retained versions stay. Unknown identity or version stays. Protected locations always stay.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grouped by app, platform, and signing team. All builds of retained versions stay. Unknown identity or version stays. Protected locations always stay."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按应用、平台及签名团队分组。保留版本中的所有构建；身份或版本未知的归档不自动选择。受保护的位置始终保留。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "依 App、平台及簽署團隊分組。保留版本中的所有建置；身分或版本未知的封存檔不自動選擇。受保護的位置一律保留。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリ、プラットフォーム、署名チーム別に分類します。保持するバージョンの全ビルドと、識別情報やバージョンが不明なものは保持します。保護された場所は常に保持します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱, 플랫폼, 서명 팀별로 분류합니다. 보존 버전의 모든 빌드를 유지하며 식별 정보나 버전이 불명확한 항목도 유지합니다. 보호된 위치는 항상 유지합니다."
+          }
+        }
+      }
+    },
+    "Selection only. Review is required before cleanup.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selection only. Review is required before cleanup."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅选择候选项，清理前仍需审阅。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "僅選擇候選項，清理前仍須檢閱。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "候補の選択のみです。削除前に確認が必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "후보만 선택합니다. 정리 전 검토가 필요합니다."
+          }
+        }
+      }
+    },
+    "Select for Review": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select for Review"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择并待审阅"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇並待檢閱"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認用に選択"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검토할 항목 선택"
+          }
+        }
+      }
+    },
+    "Archive Details": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archive Details"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "归档详情"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "封存檔詳細資訊"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブの詳細"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아카이브 세부 정보"
+          }
+        }
+      }
+    },
+    "Products": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Products"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建产物"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "建置產物"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビルド成果物"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빌드 결과물"
+          }
+        }
+      }
+    },
+    "Release Symbols": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Release Symbols"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "发布符号"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "發佈符號"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリースシンボル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "릴리스 심볼"
+          }
+        }
+      }
+    },
+    "Other Archive Data": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other Archive Data"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他归档数据"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他封存檔資料"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他のアーカイブデータ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기타 아카이브 데이터"
+          }
+        }
+      }
+    },
+    "Included in archive size; never counted twice.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Included in archive size; never counted twice."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包含在归档大小中，不重复计入总量。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包含在封存檔大小中，不重複計入總量。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブのサイズに含まれ、重複計上されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아카이브 크기에 포함되며 중복 계산되지 않습니다."
+          }
+        }
+      }
+    },
+    "Binary UUIDs: %@ · Symbol UUIDs: %@": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Binary UUIDs: %@ · Symbol UUIDs: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "二进制 UUID：%@ · 符号 UUID：%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "二進位 UUID：%@ · 符號 UUID：%@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バイナリ UUID：%@ · シンボル UUID：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바이너리 UUID: %@ · 심볼 UUID: %@"
+          }
+        }
+      }
+    },
+    "Missing UUIDs": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missing UUIDs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缺失的 UUID"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缺少的 UUID"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不足する UUID"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "누락된 UUID"
+          }
+        }
+      }
+    },
+    "Checking Symbols…": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking Symbols…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在检查符号…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在檢查符號…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シンボルを確認中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "심볼 확인 중…"
+          }
+        }
+      }
+    },
+    "Check Symbol UUIDs": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check Symbol UUIDs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查符号 UUID"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查符號 UUID"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シンボル UUID を確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "심볼 UUID 확인"
+          }
+        }
+      }
+    },
+    "Contains release symbols. Standard Clean excludes this entire folder; rebuilding may not recover matching UUIDs.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contains release symbols. Standard Clean excludes this entire folder; rebuilding may not recover matching UUIDs."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包含发布符号，常规清理将排除此文件夹。重新构建可能无法生成相同 UUID 的符号。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包含發佈符號，一般清理將排除此資料夾。重新建置可能無法產生相同 UUID 的符號。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリースシンボルを含むため、標準クリーンではこのフォルダ全体を除外します。再ビルドで同じ UUID を復元できるとは限りません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "릴리스 심볼이 포함되어 표준 정리에서 폴더 전체를 제외합니다. 다시 빌드해도 동일한 UUID를 복원하지 못할 수 있습니다."
+          }
+        }
+      }
+    },
+    "Symbol check incomplete. No backup or upload status is verified.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbol check incomplete. No backup or upload status is verified."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "符号检查未完成。未验证备份或上传状态。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "符號檢查未完成。未驗證備份或上傳狀態。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シンボルの確認は不完全です。バックアップやアップロードの状態は未確認です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "심볼 확인이 완료되지 않았습니다. 백업 또는 업로드 상태는 검증되지 않았습니다."
+          }
+        }
+      }
+    },
+    "Missing matching dSYMs: %@. Older releases may need these exact symbols.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missing matching dSYMs: %@. Older releases may need these exact symbols."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缺少匹配的 dSYM：%@。旧版崩溃分析可能需要这些特定符号。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缺少相符的 dSYM：%@。舊版當機分析可能需要這些特定符號。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一致する dSYM が %@ 件不足しています。過去のリリースには、そのビルドのシンボルが必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일치하는 dSYM %@개가 누락되었습니다. 이전 릴리스에 이 심볼이 필요할 수 있습니다."
+          }
+        }
+      }
+    },
+    "All discovered binary UUIDs have matching symbols in this archive. This does not verify a backup or upload.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All discovered binary UUIDs have matching symbols in this archive. This does not verify a backup or upload."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此归档内找到的二进制 UUID 均有匹配符号。这不代表已备份或已上传。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此封存檔內找到的二進位 UUID 均有相符符號。這不代表已備份或已上傳。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検出したすべてのバイナリ UUID に対応するシンボルがアーカイブ内にあります。バックアップやアップロードを確認したものではありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "발견된 모든 바이너리 UUID와 일치하는 심볼이 이 아카이브에 있습니다. 백업이나 업로드를 검증한 것은 아닙니다."
+          }
+        }
+      }
+    },
+    "Keep latest version": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep latest version"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留最新版本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留最新版本"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最新バージョンを保持"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최신 버전 보존"
+          }
+        }
+      }
+    },
+    "I have backed up the archives, release symbols, source changes, and local test data, or no longer need them.": {
+      "extractionState": "manual",
+      "generatesSymbol": false,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I have backed up the archives, release symbols, source changes, and local test data, or no longer need them."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我已备份归档、发布符号、源码修改及本地测试数据，或不再需要它们。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我已備份封存檔、發佈符號、原始碼修改及本機測試資料，或不再需要它們。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブ、リリースシンボル、ソースの変更、ローカルのテストデータはバックアップ済み、または不要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아카이브, 릴리스 심볼, 소스 변경 사항 및 로컬 테스트 데이터를 백업했거나 더 이상 필요하지 않습니다."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

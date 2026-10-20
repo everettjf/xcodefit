@@ -1,8 +1,8 @@
 cask "xcodesize" do
   version "1.0.0"
-  sha256 "e05f52c9cde9400cbfb70489c30b3e3b7d59de4623cb41cf373ef0fd9b90a95b"
+  sha256 "2a08970e3e80fc77ec20d4b28754fe45e7e4b8c683e8b98da3e6cded242a164e"
 
-  url "https://github.com/everettjf/homebrew-tap/releases/download/xcodesize-v#{version}/XcodeSize-#{version}.zip"
+  url "https://github.com/everettjf/homebrew-tap/releases/download/xcodesize-v#{version}/XcodeSize-#{version}.zip?build=2"
   name "XcodeSize"
   desc "Inspect and clean Xcode storage"
   homepage "https://github.com/everettjf/homebrew-tap#xcodesize"

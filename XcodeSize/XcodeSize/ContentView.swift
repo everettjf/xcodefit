@@ -63,6 +63,7 @@ struct ContentView: View {
         .frame(minWidth: 1100, minHeight: 680)
         .sheet(item: $model.plan) { plan in CleanupReviewView(plan: plan) }
         .sheet(isPresented: $model.addFolderPresented) { AddFolderView() }
+        .sheet(isPresented: $model.archiveRetentionPresented) { ArchiveRetentionView() }
         .sheet(isPresented: $model.settingsPresented) { PreferencesView() }
         .sheet(isPresented: Binding(get: { model.results != nil }, set: { if !$0 { model.results = nil } })) { CleanupResultsView() }
         .sheet(item: $model.browseURL) { url in FolderBrowserView(root: url) }
@@ -172,7 +173,7 @@ struct OverviewView: View {
                     Image(systemName: "sparkles").foregroundStyle(.blue).font(.system(size: 20))
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.text("A cleaner development environment, on your terms.")).font(.system(size: 13, weight: .medium))
-                        Text(L10n.text("Quick, Standard, or Deep. Review every cleanup before it runs.")) .font(.system(size: 11)).foregroundStyle(.secondary)
+                        Text(L10n.text("Standard or Deep. Review every cleanup before it runs.")) .font(.system(size: 11)).foregroundStyle(.secondary)
                     }
                     Spacer()
                     Button(L10n.text("Choose a Cleanup")) { model.navigate(.cleanup) }.buttonStyle(.borderedProminent).controlSize(.regular)
@@ -239,6 +240,9 @@ struct StorageListView: View {
                     }.font(.system(size: 12)).padding(7).background(.quaternary.opacity(0.45), in: RoundedRectangle(cornerRadius: 7)).frame(maxWidth: 285)
                     Spacer()
                     if isCleanup {
+                        if model.tier == .deep {
+                            Button(L10n.text("Manage Archives…")) { model.archiveRetentionPresented = true }.disabled(!model.canClean)
+                        }
                         Button(L10n.text("Select Recommended")) { model.applyRecommendations() }.disabled(!model.canClean)
                         Button(L10n.text("Clear Selection")) { model.selected = [] }.disabled(model.selected.isEmpty)
                     }
@@ -367,6 +371,10 @@ struct ItemInspector: View {
                 }
                 Divider()
                 inspectorSection(L10n.text("Purpose & Cleanup Impact"), text: item.purpose)
+                if let archive = item.archive { ArchiveInspectorView(item: item, metadata: archive).id(item.id) }
+                if item.measurement.containsReleaseSymbols && item.archive == nil {
+                    Text(L10n.text("Contains release symbols. Standard Clean excludes this entire folder; rebuilding may not recover matching UUIDs.")).font(.system(size: 11)).foregroundStyle(.orange)
+                }
                 inspectorSection(L10n.text("Owner"), text: item.owner)
                 inspectorSection(L10n.text("Identification"), text: item.evidence)
                 VStack(alignment: .leading, spacing: 7) {

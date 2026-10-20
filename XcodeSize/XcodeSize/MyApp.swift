@@ -15,6 +15,9 @@ import SwiftUI
             CommandMenu(L10n.text("Scan")) {
                 Button(L10n.text("Rescan")) { model.startScan() }.keyboardShortcut("r", modifiers: .command).disabled(model.isScanning || model.isCleaning)
                 Button(L10n.text("Stop Scan")) { model.cancelScan() }.disabled(!model.isScanning)
+                #if DEBUG
+                Button(L10n.text("Test folders · Not actual developer data")) { model.useTestFolders() }.disabled(model.isScanning || model.isCleaning)
+                #endif
                 Button(L10n.text("Add Scan Location…")) { model.addFolderPresented = true }.disabled(model.isScanning || model.isCleaning)
             }
             CommandGroup(after: .sidebar) {

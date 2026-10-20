@@ -764,7 +764,7 @@ h2 {
 }
 .tier-cards {
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:20px;
   margin-top:43px
 }
@@ -996,7 +996,7 @@ h2 {
 }
 .demo-tier-group {
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:9px;
   margin-top:28px
 }

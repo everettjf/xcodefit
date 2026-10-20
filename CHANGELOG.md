@@ -1,6 +1,16 @@
 # Changelog
 
-## 1.0.0
+## 1.0.0 — build 2 (re-release)
+
+- Replace three cleanup tiers with Standard (default) and Deep.
+- Exclude archives, detected release symbols and mutable package working copies from Standard cleanup.
+- Add per-app/platform/team archive retention previews: keep latest 1/3/5 versions with every build, or explicitly select all unprotected archives.
+- Show archive product/symbol size breakdown and local binary/dSYM UUID matching, without assuming upload or backup status.
+- Preserve protected and unidentified archives under version rules; require review and acknowledgment before cleanup.
+- Update all five app languages and add archive safety tests.
+
+
+## 1.0.0 — build 1
 
 - Browse Xcode installations, SDKs, build data, caches, archives, simulator devices and runtimes, device support, Swift packages, logs, and documentation.
 - Inspect folder sizes, source paths, purpose, ownership, and cleanup consequences. Add custom scan locations and protect folders.

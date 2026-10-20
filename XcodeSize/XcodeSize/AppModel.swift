@@ -31,7 +31,7 @@ final class AppModel {
     var sort: Sort = .size
     var focusedID: String?
     var selected: Set<String> = []
-    var tier: CleanupTier = .simple
+    var tier: CleanupTier = .regular
     var inspectorVisible = true
     var plan: CleanupPlan?
     var results: [CleanupRecord]?
@@ -39,6 +39,7 @@ final class AppModel {
     var browseURL: URL?
     var settingsPresented = false
     var addFolderPresented = false
+    var archiveRetentionPresented = false
     var customRoots: [CustomRoot] = []
     var protectedPaths: Set<String> = []
     var history: [CleanupRecord] = []
@@ -55,7 +56,7 @@ final class AppModel {
         var id: String { rawValue }
         var title: String { switch self { case .size: L10n.text("Size: Largest First"); case .name: L10n.text("Name"); case .date: L10n.text("Last Modified") } }
     }
-    private let defaults: UserDefaults
+    private var defaults: UserDefaults
     private var fixtureRoot: URL?
     var isFixture: Bool { fixtureRoot != nil }
 
@@ -74,6 +75,17 @@ final class AppModel {
         history = decode([CleanupRecord].self, key: "history") ?? []
         updateCapacity()
     }
+    #if DEBUG
+    func useTestFolders() {
+        guard !isCleaning, !isScanning else { return }
+        do {
+            fixtureRoot = try DebugFixture.make()
+            defaults = UserDefaults(suiteName: "XcodeSize.UIFixture") ?? .standard
+            customRoots = []; protectedPaths = []; history = []; selected = []; settings = CleanupSettings()
+            startScan()
+        } catch { errorMessage = error.localizedDescription }
+    }
+    #endif
     var total: Int64 { items.reduce(0) { $0 + $1.size } }
     var focused: StorageItem? { items.first { $0.id == focusedID } }
     var environment: ToolEnvironment { snapshot?.environment ?? ToolEnvironment() }
@@ -88,7 +100,7 @@ final class AppModel {
             case .category(let category): matchesDestination = item.category == category
             case .projects: matchesDestination = item.category == .builds || item.category == .archives || (item.projectDataRoot != nil && item.category != .other)
             case .protected: matchesDestination = isProtected(item)
-            case .cleanup: matchesDestination = item.action != .readOnly && item.minimumTier.rawValue <= tier.rawValue
+            case .cleanup: matchesDestination = item.action != .readOnly && item.minimumTier.rawValue <= tier.rawValue && (tier == .deep || !item.requiresDeepCleanup)
             default: matchesDestination = true
             }
             return matchesDestination && (search.isEmpty || [item.name, item.url.path, item.owner, item.category.title].contains { $0.localizedCaseInsensitiveContains(search) })

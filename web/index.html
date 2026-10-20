@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#fafbf9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0f151c" media="(prefers-color-scheme: dark)">
   <title>XcodeSize — Your Xcode storage, under control.</title>
-  <meta name="description" content="A free, open-source macOS app to understand Xcode storage and review Quick, Standard, or Deep cleanup. Available for Apple Silicon and Intel.">
+  <meta name="description" content="A free, open-source macOS app to understand Xcode storage and review Standard or Deep cleanup. Available for Apple Silicon and Intel.">
   <link rel="canonical" href="https://xnu.app/xcodesize/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="XcodeSize — Make room for your next build.">
@@ -16,8 +16,8 @@
   <meta property="og:url" content="https://xnu.app/xcodesize/">
   <meta property="og:image" content="https://xnu.app/xcodesize/assets/app-icon.png">
   <link rel="icon" href="assets/app-icon.png" type="image/png">
-  <link rel="stylesheet" href="styles.css?v=961a69253261">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=6ad6d8d43050">
+  <script src="app.js?v=d98bf6b28a89" defer></script>
 </head>
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -51,7 +51,7 @@
       <h1 id="hero-title">Your Xcode storage.<br><span>Under control.</span></h1>
       <p class="hero-copy">Builds, caches, simulators, and everything in between.<br class="desktop-break"> See what’s taking space. Choose what to keep.</p>
       <div class="hero-actions">
-        <a class="button primary" href="https://github.com/everettjf/homebrew-tap/releases/download/xcodesize-v1.0.0/XcodeSize-1.0.0.zip"><svg class="icon"><use href="#icon-download"/></svg>Download for Mac</a>
+        <a class="button primary" href="https://github.com/everettjf/homebrew-tap/releases/download/xcodesize-v1.0.0/XcodeSize-1.0.0.zip?build=2"><svg class="icon"><use href="#icon-download"/></svg>Download for Mac</a>
         <a class="button secondary" href="https://github.com/everettjf/xcodesize"><svg class="icon"><use href="#github"/></svg>View source</a>
       </div>
       <p class="requirements">macOS 14+ <span>·</span> Apple Silicon & Intel <span>·</span> Free & open source</p>
@@ -92,13 +92,12 @@
               </div>
             </div>
             <div id="preview-cleanup" class="demo-panel" role="tabpanel" aria-labelledby="tab-cleanup" hidden>
-              <div class="demo-heading"><div><h2>A cleaner development environment.</h2><p>Three levels. Every cleanup starts with a review.</p></div><svg class="icon stack-mark"><use href="#sparkle"/></svg></div>
+              <div class="demo-heading"><div><h2>A cleaner development environment.</h2><p>Two modes. Every cleanup starts with a review.</p></div><svg class="icon stack-mark"><use href="#sparkle"/></svg></div>
               <div class="demo-tier-group" aria-label="Example cleanup level">
-                <button class="demo-tier active" data-tier="quick" aria-pressed="true"><svg class="icon"><use href="#sparkle"/></svg>Quick<small>Caches & old logs</small></button>
-                <button class="demo-tier" data-tier="standard" aria-pressed="false"><svg class="icon"><use href="#layers"/></svg>Standard<small>Idle builds & dependencies</small></button>
+                <button class="demo-tier active" data-tier="standard" aria-pressed="true"><svg class="icon"><use href="#layers"/></svg>Standard<small>Safe everyday cleanup</small></button>
                 <button class="demo-tier" data-tier="deep" aria-pressed="false"><svg class="icon"><use href="#archive"/></svg>Deep<small>Choose more, deliberately</small></button>
               </div>
-              <div class="cleanup-example"><span class="mini-eyebrow">EXAMPLE REVIEW</span><h3 id="tier-title">Clear the rebuildable clutter.</h3><p id="tier-description">Start with compiler caches and old logs. Caches can be regenerated; the next build may take longer.</p><div class="example-file"><svg class="icon teal"><use href="#folder"/></svg><div><strong id="tier-folder">ModuleCache.noindex</strong><code id="tier-path">~/Library/Developer/Xcode/DerivedData/</code></div><span id="tier-method">Move to Trash</span></div></div>
+              <div class="cleanup-example"><span class="mini-eyebrow">EXAMPLE REVIEW</span><h3 id="tier-title">Clear the rebuildable clutter.</h3><p id="tier-description">Clean compiler caches, old logs, and idle builds. Archives, release symbols, and source working copies stay out of Standard Clean.</p><div class="example-file"><svg class="icon teal"><use href="#folder"/></svg><div><strong id="tier-folder">ModuleCache.noindex</strong><code id="tier-path">~/Library/Developer/Xcode/DerivedData/</code></div><span id="tier-method">Move to Trash</span></div></div>
               <div class="review-note"><svg class="icon"><use href="#shield"/></svg><span id="tier-note">Moving files to Trash does not immediately free disk space.</span></div>
             </div>
           </div>
@@ -121,14 +120,13 @@
     <section id="cleanup" class="cleanup-section section-space" aria-labelledby="cleanup-title"><div class="wrap">
       <div class="section-center"><span class="eyebrow">YOUR SPACE. YOUR CALL.</span><h2 id="cleanup-title">A little tidy. Or a fresh start.</h2><p>Choose how far to go. Review the details before anything runs.</p></div>
       <div class="tier-cards">
-        <article class="tier-card"><span class="tier-number">01 / THE EVERYDAY TIDY</span><svg class="icon blue"><use href="#sparkle"/></svg><h3>Quick Clean</h3><p>Start with regenerable compiler caches, old logs, and documentation caches.</p><div class="tier-footer">A lighter place to start.</div></article>
-        <article class="tier-card"><span class="tier-number">02 / A LITTLE MORE ROOM</span><svg class="icon teal"><use href="#layers"/></svg><h3>Standard Clean</h3><p>Add idle project builds, indexes, dependencies, and older device support, guided by retention rules.</p><div class="tier-footer">Keep recent work close.</div></article>
-        <article class="tier-card"><span class="tier-number">03 / THE CONSIDERED RESET</span><svg class="icon purple"><use href="#archive"/></svg><h3>Deep Clean</h3><p>Go further with recent rebuildable data. Explicitly choose archives, devices, runtimes, and inactive Xcode installations.</p><div class="tier-footer">More choice. More care.</div></article>
+        <article class="tier-card"><span class="tier-number">01 / THE SAFE DEFAULT</span><svg class="icon teal"><use href="#layers"/></svg><h3>Standard Clean</h3><p>Clean regenerable caches, old logs, and idle build data. Archives, release symbols, and source working copies are excluded.</p><div class="tier-footer">The default every time you open the app.</div></article>
+        <article class="tier-card"><span class="tier-number">02 / THE CONSIDERED RESET</span><svg class="icon purple"><use href="#archive"/></svg><h3>Deep Clean</h3><p>Choose more deliberately. Keep the latest 1, 3, or 5 archive versions with every build, or select all unprotected archives. Devices and runtimes remain explicit choices.</p><div class="tier-footer">Protected locations always stay.</div></article>
       </div>
       <div class="safety"><div class="safety-intro"><span class="shield-tile"><svg class="icon"><use href="#shield"/></svg></span><h3>You’re always <br>in control.</h3></div><div class="safety-details"><p><svg class="icon"><use href="#check"/></svg><span><strong>Review first.</strong> See the path, purpose, and cleanup impact.</span></p><p><svg class="icon"><use href="#check"/></svg><span><strong>Keep what matters.</strong> Protect locations from cleanup.</span></p><p><svg class="icon"><use href="#check"/></svg><span><strong>Use the right tools.</strong> Files go to Trash; simulator removal uses Apple’s tools with additional confirmation.</span></p><p><svg class="icon"><use href="#check"/></svg><span><strong>No forced exits.</strong> No automatic cleanup or emptying Trash.</span></p></div></div>
       <p class="space-note">Allocated size is not a promise of freed space. Trash, APFS shared blocks, and snapshots affect what’s actually reclaimed. Some archives and device data cannot be recreated.</p>
     </div></section>
-    <section id="download" class="download-section wrap section-space" aria-labelledby="download-title"><img src="assets/app-icon.png" width="80" height="80" alt="XcodeSize app icon" loading="lazy"><span class="eyebrow">READY FOR THE NEXT BUILD</span><h2 id="download-title">More room.<br>Less guesswork.</h2><p>Native on Mac. Free to use. Open to everyone.</p><a class="button primary" href="https://github.com/everettjf/homebrew-tap/releases/download/xcodesize-v1.0.0/XcodeSize-1.0.0.zip"><svg class="icon"><use href="#icon-download"/></svg>Download XcodeSize <span class="button-version">1.0.0</span></a><div class="install-block"><span>Or install with Homebrew</span><div class="terminal"><span class="terminal-prompt" aria-hidden="true">$</span><code id="install-command">brew install --cask everettjf/tap/xcodesize</code><button id="copy-command" aria-label="Copy Homebrew install command"><svg class="icon"><use href="#copy"/></svg></button></div><span id="copy-status" role="status" aria-live="polite">Signed & notarized · macOS 14+ · Apple Silicon & Intel</span></div><div class="language-list" aria-label="App interface languages"><span>English</span><span>简体中文</span><span>繁體中文</span><span>日本語</span><span>한국어</span></div></section>
+    <section id="download" class="download-section wrap section-space" aria-labelledby="download-title"><img src="assets/app-icon.png" width="80" height="80" alt="XcodeSize app icon" loading="lazy"><span class="eyebrow">READY FOR THE NEXT BUILD</span><h2 id="download-title">More room.<br>Less guesswork.</h2><p>Native on Mac. Free to use. Open to everyone.</p><a class="button primary" href="https://github.com/everettjf/homebrew-tap/releases/download/xcodesize-v1.0.0/XcodeSize-1.0.0.zip?build=2"><svg class="icon"><use href="#icon-download"/></svg>Download XcodeSize <span class="button-version">1.0.0</span></a><div class="install-block"><span>Or install with Homebrew</span><div class="terminal"><span class="terminal-prompt" aria-hidden="true">$</span><code id="install-command">brew install --cask everettjf/tap/xcodesize</code><button id="copy-command" aria-label="Copy Homebrew install command"><svg class="icon"><use href="#copy"/></svg></button></div><span id="copy-status" role="status" aria-live="polite">Signed & notarized · macOS 14+ · Apple Silicon & Intel</span></div><div class="language-list" aria-label="App interface languages"><span>English</span><span>简体中文</span><span>繁體中文</span><span>日本語</span><span>한국어</span></div></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img src="assets/app-icon.png" width="26" height="26" alt=""><span>XcodeSize</span></a><span class="footer-credit">A little breathing room for developers.</span><div><a href="https://github.com/everettjf/xcodesize">GitHub ↗</a><a href="https://github.com/everettjf/homebrew-tap/releases/tag/xcodesize-v1.0.0">Release notes</a><a href="https://github.com/everettjf/xcodesize/blob/main/LICENSE">Apache 2.0</a></div></footer>
 </body>

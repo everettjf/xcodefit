@@ -52,13 +52,15 @@ final class StorageScanner {
             var blocked = candidate.blocked
             if FileSizer.isSymlink(candidate.url) { blocked = L10n.text("Only the symbolic link itself is counted. Its target is not followed or cleaned.") }
             if !exclusions.isEmpty && candidate.action != .readOnly { blocked = L10n.text("This folder contains separately managed data. Browsing only.") }
-            let item = StorageItem(url: candidate.url, name: candidate.name ?? candidate.url.lastPathComponent,
+            var item = StorageItem(url: candidate.url, name: candidate.name ?? candidate.url.lastPathComponent,
                                    category: candidate.category, purpose: candidate.category.purpose,
                                    owner: candidate.owner, evidence: candidate.evidence, measurement: measurement,
                                    action: candidate.action, minimumTier: candidate.tier, manualOnly: candidate.manual,
                                    blockedReason: blocked, date: candidate.date ?? measurement.newestModification,
                                    dateLabel: candidate.dateLabel, sourceRoot: candidate.sourceRoot, subtitle: candidate.subtitle,
                                    retainedDeviceSupport: candidate.retainedDeviceSupport, projectDataRoot: candidate.projectDataRoot)
+            if candidate.url.pathExtension == "xcarchive", !FileSizer.isSymlink(candidate.url) { item.archive = ArchiveMetadata.read(candidate.url) }
+            if measurement.containsReleaseSymbols || measurement.containsWorkingCopies { item.minimumTier = .deep; item.manualOnly = true }
             items.append(item); emit(.item(item))
             if measurement.unreadable > 0 { notices.append(ScanNotice(path: item.id, message: L10n.text("Unreadable entries: %@. Size includes only readable content; cleanup is disabled.", String(describing: (measurement.unreadable))), isError: true)) }
         }
@@ -97,7 +99,7 @@ final class StorageScanner {
                 case "Toolchains": split(child, category: .installations)
                 case "Shared":
                     for shared in children(child) {
-                        if shared.lastPathComponent == "Documentation" { split(shared, category: .logs, action: .trash, tier: .simple) }
+                        if shared.lastPathComponent == "Documentation" { split(shared, category: .logs, action: .trash, tier: .regular) }
                         else { add(shared, .other) }
                     }
                 case "DVTDownloads": split(child, category: .components)
@@ -120,7 +122,7 @@ final class StorageScanner {
             for cache in children(cacheRoot) {
                 let name = cache.lastPathComponent
                 if name == "org.swift.swiftpm" { split(cache, category: .packages, action: .trash, tier: .regular) }
-                else if name.hasPrefix("com.apple.dt.Xcode") || name == "com.apple.DeveloperTools" { split(cache, category: .caches, action: .trash, tier: .simple) }
+                else if name.hasPrefix("com.apple.dt.Xcode") || name == "com.apple.DeveloperTools" { split(cache, category: .caches, action: .trash, tier: .regular) }
             }
         }
         for relative in [".cache/swift-package-manager", ".cache/org.swift.swiftpm"] {
@@ -133,7 +135,7 @@ final class StorageScanner {
         }
         for relative in ["Library/Logs/CoreSimulator", "Library/Logs/Xcode", "Library/Application Support/com.apple.dt.Xcode"] {
             let url = config.home.appendingPathComponent(relative)
-            if exists(url) { roots.append(url.path); split(url, category: relative.contains("Logs") ? .logs : .other, action: relative.contains("Logs") ? .trash : .readOnly, tier: .simple) }
+            if exists(url) { roots.append(url.path); split(url, category: relative.contains("Logs") ? .logs : .other, action: relative.contains("Logs") ? .trash : .readOnly, tier: .regular) }
         }
         // Only attributable developer-tool caches; never scan or clean all of /var/folders.
         if config.discoverEnvironment {
@@ -142,7 +144,7 @@ final class StorageScanner {
                 let path = cache.output.trimmingCharacters(in: .whitespacesAndNewlines)
                 if path.hasPrefix("/var/folders/") || path.hasPrefix("/private/var/folders/") {
                     let url = URL(fileURLWithPath: path).appendingPathComponent("com.apple.DeveloperTools")
-                    if exists(url) { roots.append(url.path); split(url, category: .caches, action: .trash, tier: .simple) }
+                    if exists(url) { roots.append(url.path); split(url, category: .caches, action: .trash, tier: .regular) }
                 }
             }
             discoverXcodePreferences()
@@ -195,12 +197,12 @@ final class StorageScanner {
             else if name == "UserData" {
                 for data in children(child) {
                     if data.lastPathComponent == "Previews" { split(data, category: .previews, action: .trash, tier: .deep, manual: true) }
-                    else if data.lastPathComponent == "IB Support" { split(data, category: .caches, action: .trash, tier: .simple) }
+                    else if data.lastPathComponent == "IB Support" { split(data, category: .caches, action: .trash, tier: .regular) }
                     else { add(data, .other, blocked: L10n.text("User settings, code snippets, or personal data. Browsing only.")) }
                 }
-            } else if ["DocumentationCache", "iOS Device Logs", "Documentation"].contains(name) { split(child, category: .logs, action: .trash, tier: .simple) }
+            } else if ["DocumentationCache", "iOS Device Logs", "Documentation"].contains(name) { split(child, category: .logs, action: .trash, tier: .regular) }
             else if name == "Products" { split(child, category: .builds, action: .trash, tier: .deep, manual: true) }
-            else if name.contains("Cache") { add(child, .caches, action: .trash, tier: .simple) }
+            else if name.contains("Cache") { add(child, .caches, action: .trash, tier: .regular) }
             else { add(child, .other) }
         }
     }
@@ -213,7 +215,7 @@ final class StorageScanner {
         for child in children(root) {
             let name = child.lastPathComponent
             if ["ModuleCache", "ModuleCache.noindex", "CompilationCache.noindex", "SDKStatCaches.noindex", "SDKExplicitPrecompiledModules", "SymbolCache.noindex"].contains(name) {
-                add(child, .caches, action: .trash, tier: .simple, root: root)
+                add(child, .caches, action: .trash, tier: .regular, root: root)
             } else { discoverProject(child) }
         }
     }
@@ -239,12 +241,12 @@ final class StorageScanner {
             let tier: CleanupTier
             switch partName {
             case "Build", "Index", "Index.noindex", "PrecompiledHeaders": category = .builds; action = .trash; tier = .regular
-            case "SourcePackages": category = .packages; action = .trash; tier = .regular
+            case "SourcePackages": category = .packages; action = .trash; tier = .deep
             case "Logs": category = .logs; action = .trash; tier = .regular
-            case "ModuleCache", "ModuleCache.noindex", "CompilationCache.noindex", "SDKStatCaches.noindex", "SDKExplicitPrecompiledModules": category = .caches; action = .trash; tier = .simple
+            case "ModuleCache", "ModuleCache.noindex", "CompilationCache.noindex", "SDKStatCaches.noindex", "SDKExplicitPrecompiledModules": category = .caches; action = .trash; tier = .regular
             default: category = .other; action = .readOnly; tier = .deep
             }
-            add(part, category, action: action, tier: tier, name: (project ?? name) + " · " + DirectoryBrowser.explanation(partName),
+            add(part, category, action: action, tier: tier, manual: partName == "SourcePackages", name: (project ?? name) + " · " + DirectoryBrowser.explanation(partName),
                 owner: workspace ?? name, evidence: "DerivedData/" + (workspace == nil ? L10n.text("build structure") : "info.plist → WorkspacePath") + " → " + partName,
                 root: projectData, subtitle: partName, projectDataRoot: projectData)
         }
@@ -290,7 +292,7 @@ final class StorageScanner {
             return a > b
         }
         for (index, child) in values.enumerated() {
-            add(child, .deviceSupport, action: .trash, tier: .regular, owner: root.lastPathComponent, root: root, subtitle: index < config.keepDeviceSupportVersions ? L10n.text("Retained · Most recently modified versions: %@", String(describing: (config.keepDeviceSupportVersions))) : root.lastPathComponent, retainedDeviceSupport: index < config.keepDeviceSupportVersions)
+            add(child, .deviceSupport, action: .trash, tier: .deep, manual: true, owner: root.lastPathComponent, root: root, subtitle: index < config.keepDeviceSupportVersions ? L10n.text("Retained · Most recently modified versions: %@", String(describing: (config.keepDeviceSupportVersions))) : root.lastPathComponent, retainedDeviceSupport: index < config.keepDeviceSupportVersions)
         }
     }
     private func discoverCoreSimulator(_ root: URL) {
@@ -307,7 +309,7 @@ final class StorageScanner {
                     } else if UUID(uuidString: id) != nil { add(device, .simulators, root: child, subtitle: L10n.text("Unregistered Device · Read Only")) }
                     else { add(device, .other, root: child) }
                 }
-            case "Caches": split(child, category: .caches, action: .trash, tier: .simple)
+            case "Caches": split(child, category: .caches, action: .trash, tier: .regular)
             case "Profiles":
                 for profile in children(child) { split(profile, category: .components) }
             default: add(child, .components)

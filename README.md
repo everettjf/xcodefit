@@ -59,15 +59,18 @@ Suggested additions, not yet shipped: German (`de`), French (`fr`), Spanish (`es
 python3 Tools/ValidateLocalizations.py
 ```
 
-## Three cleanup tiers
+## Two cleanup modes
 
-| Tier | Recommended scope |
+| Mode | Scope |
 | --- | --- |
-| Simple | Regenerable compile caches; old logs and documentation caches |
-| Regular | Simple plus idle project build/index/package data and old device support |
-| Deep | Regular plus recent regenerable data; archives, devices, runtimes and inactive Xcode installations become explicit manual candidates |
+| Standard (default) | Regenerable compiler caches, old logs and idle build/index data. Archives, release symbols, source working copies, and device/test state are excluded. A build folder containing dSYMs is excluded as a whole. |
+| Deep | Adds recent rebuildable data and explicit manual choices for archives, dependencies with source working copies, device support, simulators, runtimes, and inactive Xcode installations. |
 
-Defaults: retain logs for 30 days, idle threshold 90 days, and retain the two most recently modified device-support entries per platform. Settings affect recommendations. Modification time is labeled as such, never presented as proof of last use. Archives, simulator state, preview/test devices and old installations are not automatically selected.
+Defaults: retain logs for 30 days and use a 90-day idle threshold. Settings affect recommendations. Modification time is labeled as such, never presented as proof of last use. Irreplaceable data is never selected by **Select Recommended**.
+
+Deep mode's **Manage Archives** previews rules to keep the latest 1, 3, or 5 numeric marketing versions per bundle ID, platform, and signing team, retaining **every build** of each version. Missing identity, unknown versions and protected paths stay. The default rule keeps 3 versions. **Remove all unprotected archives** explicitly includes unidentified archives, but still honors protection and scan/cleanup eligibility; it does not delete exported symbols outside those archives. Rules only change the selection. The cleanup review and acknowledgment are still required.
+
+Archive details show products, release symbols (dSYMs and legacy BCSymbolMaps), and remaining data as parts of the archive total. **Check Symbol UUIDs** runs local `xcrun dwarfdump --uuid` on discovered Mach-O files in Products and dSYMs, including frameworks/extensions and architectures. It reports missing matches and incomplete checks, without claiming upload or backup verification. The app does not infer whether a build was distributed or is still supported. Keep all distributed builds you still need to symbolicate, even when a newer version exists. See [Apple's debugging information guidance](https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information).
 
 All cleanup goes through a review sheet. Ordinary files use `FileManager.trashItem`; failure does not fall back to permanent deletion. Devices and registered runtime images use exact UUIDs with `simctl delete` / `simctl runtime delete`, with an additional irreversible-operation acknowledgment. Unsupported system-managed components remain read-only.
 

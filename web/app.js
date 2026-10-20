@@ -25,23 +25,17 @@ tabs.forEach((tab, index) => {
   });
 });
 const examples = {
-  quick: {
-    title: 'Clear the rebuildable clutter.',
-    description: 'Start with compiler caches and old logs. Caches can be regenerated; the next build may take longer.',
-    folder: 'ModuleCache.noindex', path: '~/Library/Developer/Xcode/DerivedData/', method: 'Move to Trash',
-    note: 'Moving files to Trash does not immediately free disk space.'
-  },
   standard: {
-    title: 'Give idle projects a little room.',
-    description: 'Add idle builds and dependencies, guided by your retention rules. A future build may need to rebuild indexes or download packages again.',
-    folder: 'MyApp / Build', path: '~/Library/Developer/Xcode/DerivedData/MyApp-…/', method: 'Move to Trash',
+    title: 'Clear the rebuildable clutter.',
+    description: 'Clean compiler caches, old logs, and idle builds. Archives, release symbols, and source working copies stay out of Standard Clean.',
+    folder: 'ModuleCache.noindex', path: '~/Library/Developer/Xcode/DerivedData/', method: 'Move to Trash',
     note: 'Protect a project’s location to keep it out of cleanup.'
   },
   deep: {
     title: 'Choose what you no longer need.',
-    description: 'Explicitly select archives, devices, runtimes, or inactive Xcode installations. Archives and device test data may be irreplaceable.',
-    folder: 'Example simulator device', path: '~/Library/Developer/CoreSimulator/Devices/<UUID>/', method: 'Apple simctl',
-    note: 'Simulator removal permanently deletes local test data. Additional confirmation is required.'
+    description: 'Keep the latest 1, 3, or 5 archive versions, including every build, or select all unprotected archives. Review the release-symbol impact before cleanup.',
+    folder: 'MyApp.xcarchive', path: '~/Library/Developer/Xcode/Archives/', method: 'Move to Trash',
+    note: 'Older releases need their own matching dSYMs. Protected locations always stay; additional confirmation is required.'
   }
 };
 document.querySelectorAll('[data-tier]').forEach(button => {

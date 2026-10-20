@@ -24,6 +24,7 @@ struct CleanupReviewView: View {
                             Image(systemName: item.category.symbol).foregroundStyle(item.category.tint).frame(width: 20)
                             VStack(alignment: .leading, spacing: 5) {
                                 HStack { Text(item.name).fontWeight(.medium); Spacer(); Text(StorageFormatting.bytes(item.size)).monospacedDigit() }
+                                if !item.subtitle.isEmpty { Text(item.subtitle).font(.system(size: 11, weight: .medium)).foregroundStyle(.secondary) }
                                 Text(PathRules.compact(item.url)).font(.system(size: 10, design: .monospaced)).foregroundStyle(.secondary).textSelection(.enabled)
                                 Text(item.action.title).font(.system(size: 11, weight: .medium)).foregroundStyle(item.action.isPermanent ? .orange : .blue)
                                 Text(item.purpose).font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
@@ -37,7 +38,7 @@ struct CleanupReviewView: View {
                 Label(L10n.text("Moving files to Trash does not immediately free space. Files and development tools will be checked again before cleanup."), systemImage: "info.circle")
                     .font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 if plan.hasIrreplaceableData {
-                    Toggle(L10n.text("I have backed up the archives, symbols, and device test data, or no longer need them."), isOn: $acknowledgeLoss).font(.system(size: 12))
+                    Toggle(L10n.text("I have backed up the archives, release symbols, source changes, and local test data, or no longer need them."), isOn: $acknowledgeLoss).font(.system(size: 12))
                 }
                 if plan.hasPermanentActions {
                     Toggle(L10n.text("I understand that simctl permanently removes the selected devices or runtimes. These actions cannot be undone."), isOn: $acknowledgePermanent).font(.system(size: 12))

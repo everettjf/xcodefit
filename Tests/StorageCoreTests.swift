@@ -16,7 +16,7 @@ final class StorageCoreTests: XCTestCase {
         return url
     }
     func item(_ url: URL, category: StorageCategory = .caches, action: CleanupAction = .trash) -> StorageItem {
-        StorageItem(url: url, name: url.lastPathComponent, category: category, purpose: category.purpose, owner: "Fixture", evidence: "Fixture", measurement: FileSizer.measure(url), action: action, minimumTier: .simple, date: Date(timeIntervalSinceNow: -100 * 86400), sourceRoot: root)
+        StorageItem(url: url, name: url.lastPathComponent, category: category, purpose: category.purpose, owner: "Fixture", evidence: "Fixture", measurement: FileSizer.measure(url), action: action, minimumTier: .regular, date: Date(timeIntervalSinceNow: -100 * 86400), sourceRoot: root)
     }
     var idle: ToolEnvironment { ToolEnvironment(processStateKnown: true, simulatorStateKnown: true) }
 
@@ -68,7 +68,7 @@ final class StorageCoreTests: XCTestCase {
         var build = item(try file("build"), category: .builds)
         build.minimumTier = .regular
         let settings = CleanupSettings()
-        XCTAssertFalse(CleanupPolicy.recommended(build, tier: .simple, settings: settings, protectedPaths: [], environment: idle))
+        XCTAssertEqual(CleanupTier.allCases, [.regular, .deep])
         XCTAssertTrue(CleanupPolicy.recommended(build, tier: .regular, settings: settings, protectedPaths: [], environment: idle))
         build.date = Date()
         XCTAssertFalse(CleanupPolicy.recommended(build, tier: .regular, settings: settings, protectedPaths: [], environment: idle))
@@ -79,14 +79,14 @@ final class StorageCoreTests: XCTestCase {
     }
     func testProtectedAncestorAndDescendantBothBlock() throws {
         let value = item(try file("project/cache"))
-        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .simple, protectedPaths: [root.appendingPathComponent("project").path], environment: idle))
-        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .simple, protectedPaths: [value.id + "/keep"], environment: idle))
+        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [root.appendingPathComponent("project").path], environment: idle))
+        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [value.id + "/keep"], environment: idle))
     }
     func testCleanupMovesOnlyUnchangedFixtureAndReportsTrashHonestly() throws {
         let value = item(try file("cache"))
         let idle = idle, destination = root.appendingPathComponent("fixture-trash")
         let engine = CleanupEngine(inspect: { idle }, trash: { url in try FileManager.default.moveItem(at: url, to: destination); return destination })
-        let records = engine.execute(CleanupPlan(tier: .simple, items: [value]), protectedPaths: [])
+        let records = engine.execute(CleanupPlan(tier: .regular, items: [value]), protectedPaths: [])
         XCTAssertEqual(records.first?.outcome, .trashed)
         XCTAssertTrue(FileManager.default.fileExists(atPath: destination.path))
         XCTAssertTrue(records.first?.message.contains("until Trash is emptied") == true)
@@ -96,10 +96,10 @@ final class StorageCoreTests: XCTestCase {
         try Data(repeating: 66, count: 4096).write(to: value.url, options: .atomic)
         let idle = idle
         let engine = CleanupEngine(inspect: { idle }, trash: { _ in XCTFail("Changed file must not be trashed"); return nil })
-        XCTAssertEqual(engine.execute(CleanupPlan(tier: .simple, items: [value]), protectedPaths: []).first?.outcome, .skipped)
+        XCTAssertEqual(engine.execute(CleanupPlan(tier: .regular, items: [value]), protectedPaths: []).first?.outcome, .skipped)
         var busy = idle; busy.runningTools = ["xcodebuild"]
-        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .simple, protectedPaths: [], environment: busy))
-        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .simple, protectedPaths: [], environment: ToolEnvironment()))
+        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: busy))
+        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: ToolEnvironment()))
     }
     func testCleanupRejectsSymlinkSwapAndContainerRoots() throws {
         let value = item(try file("cache"))
@@ -157,7 +157,7 @@ final class StorageCoreTests: XCTestCase {
     func testNativeTrashAPIOnDisposableFixtureAndRestore() throws {
         let url = try file("native-trash-fixture")
         let value = item(url), state = idle
-        let records = CleanupEngine(inspect: { state }).execute(CleanupPlan(tier: .simple, items: [value]), protectedPaths: [])
+        let records = CleanupEngine(inspect: { state }).execute(CleanupPlan(tier: .regular, items: [value]), protectedPaths: [])
         let record = try XCTUnwrap(records.first)
         XCTAssertEqual(record.outcome, .trashed)
         let trashPath = try XCTUnwrap(record.trashPath)

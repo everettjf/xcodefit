@@ -27,6 +27,18 @@ enum DebugFixture {
         let plist: [String: Any] = ["WorkspacePath": root.appendingPathComponent("Projects/Atlas.xcodeproj").path]
         let data = try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: 0)
         try data.write(to: root.appendingPathComponent("Library/Developer/Xcode/DerivedData/Atlas-hash/info.plist"))
+        for (index, version) in ["1.9", "1.10", "2.0", "2.1", "2.1"].enumerated() {
+            let archive = root.appendingPathComponent("Library/Developer/Xcode/Archives/2025-01-01/Atlas-" + String(index) + ".xcarchive")
+            let product = archive.appendingPathComponent("Products/Applications/Atlas.app")
+            let dwarf = archive.appendingPathComponent("dSYMs/Atlas.app.dSYM/Contents/Resources/DWARF")
+            try fm.createDirectory(at: product, withIntermediateDirectories: true)
+            try fm.createDirectory(at: dwarf, withIntermediateDirectories: true)
+            try fm.copyItem(at: URL(fileURLWithPath: "/usr/bin/true"), to: product.appendingPathComponent("Atlas"))
+            try fm.copyItem(at: URL(fileURLWithPath: "/usr/bin/true"), to: dwarf.appendingPathComponent("Atlas"))
+            let properties: [String: Any] = ["ApplicationPath": "Applications/Atlas.app", "CFBundleIdentifier": "com.example.Atlas", "CFBundleShortVersionString": version, "CFBundleVersion": String(100 + index), "Team": "EXAMPLE"]
+            try PropertyListSerialization.data(fromPropertyList: ["Name": "Atlas", "ApplicationProperties": properties, "CreationDate": Date(timeIntervalSinceNow: Double(index - 10) * 86400)], format: .xml, options: 0).write(to: archive.appendingPathComponent("Info.plist"))
+            try PropertyListSerialization.data(fromPropertyList: ["DTPlatformName": "macosx"], format: .xml, options: 0).write(to: product.appendingPathComponent("Info.plist"))
+        }
         if let walker = fm.enumerator(at: root, includingPropertiesForKeys: nil) {
             for case let url as URL in walker { try fm.setAttributes([.modificationDate: Date(timeIntervalSinceNow: -200 * 86400)], ofItemAtPath: url.path) }
         }

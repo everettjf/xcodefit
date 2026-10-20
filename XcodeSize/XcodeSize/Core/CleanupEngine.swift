@@ -19,7 +19,7 @@ struct CleanupPlan: Identifiable, Sendable {
     var items: [StorageItem]
     var bytes: Int64 { items.reduce(0) { $0 + $1.size } }
     var hasPermanentActions: Bool { items.contains { $0.action.isPermanent } }
-    var hasIrreplaceableData: Bool { items.contains { [.archives, .simulators, .previews].contains($0.category) } }
+    var hasIrreplaceableData: Bool { items.contains { $0.requiresDeepCleanup } }
 }
 
 enum CleanupError: LocalizedError {
