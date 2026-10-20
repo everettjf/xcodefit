@@ -117,6 +117,8 @@ The product website is a dependency-free static site in `web/`. GitHub Actions d
 python3 -m http.server 8080 --directory web
 ```
 
+The website follows the system light/dark appearance automatically using CSS, including live preference changes without a reload. Both themes include the product preview, installation command, and browser theme colors.
+
 The interactive product preview uses illustrative data; it never scans a visitor’s computer. The website loads no third-party scripts, fonts, or analytics.
 
 ## License
