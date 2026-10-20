@@ -7,6 +7,12 @@ cask "xcodesize" do
   desc "Inspect and clean Xcode storage"
   homepage "https://github.com/everettjf/homebrew-tap#xcodesize"
 
+  livecheck do
+    url :url
+    regex(/^xcodesize-v(\d+(?:\.\d+)+)$/i)
+    strategy :github_releases
+  end
+
   depends_on macos: :sonoma
 
   app "XcodeSize.app"
