@@ -42,7 +42,7 @@ const systemAppearance = window.matchMedia('(prefers-color-scheme: dark)');
 let appPreviewMode = 'auto';
 function updateAppPreviewLink() {
  const dark = appPreviewMode === 'dark' || (appPreviewMode === 'auto' && systemAppearance.matches);
- appImageLinks.forEach(link => { link.href = `assets/screenshots/${link.dataset.screenshot}-${dark ? 'dark' : 'light'}.jpg`; });
+ appImageLinks.forEach(link => { link.href = `assets/screenshots/${link.dataset.screenshot}-${dark ? 'dark' : 'light'}.jpg?v=107-compact`; });
 }
 appThemeButtons.forEach(button => button.addEventListener('click', () => {
  appPreviewMode = button.dataset.appTheme;
