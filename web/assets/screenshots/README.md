@@ -1,6 +1,6 @@
 # Native app screenshots
 
-Real XcodeFit captures, using Debug `--ui-fixture` and isolated disposable folders, taken on 2026-10-20. The interface matches the native system appearance introduced in 1.0.3. The operating system's screen-sharing indicator may appear in the title bar; it is not an XcodeFit control.
+Real XcodeFit captures, using Debug `--ui-fixture` and isolated disposable folders, taken on 2026-10-20. The interface uses native system surfaces and bamboo-green accents. The operating system's screen-sharing indicator may appear in the title bar; it is not an XcodeFit control.
 
 - `overview-light.jpg` / `overview-dark.jpg`: overview, originally saved as `output/screenshots/xcodefit-system-light.jpg` / `xcodefit-system-dark.jpg`.
 - `cleanup-light.jpg` / `cleanup-dark.jpg`: Standard Clean screen, with no items selected and no cleanup executed.

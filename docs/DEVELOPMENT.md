@@ -61,6 +61,8 @@ open build/Build/Products/Debug/XcodeFit.app --args --ui-fixture
 
 Provide a `NOTARY_KEYCHAIN_PROFILE`, or `APPLE_ID`, `APPLE_TEAM_ID`, and `APPLE_SPECIFIC_PASSWORD` in the environment. `SIGNING_IDENTITY` can select a particular Developer ID identity; otherwise the first available Developer ID Application identity is used. Never commit credentials. Release versions come from `MARKETING_VERSION` in the Xcode project. The Homebrew cask is mirrored under `packaging/homebrew/Casks/xcodefit.rb`.
 
+Keep release numbers and versioned ZIP paths out of the README and website. Download and release-note links use the stable XcodeFit-filtered release list in the shared Homebrew repository. Update the Homebrew cask for each release; do not use that repository’s global latest-release URL, since other apps publish there too.
+
 ## Website
 
 The product website is a dependency-free static site in `web/`. GitHub Actions deploys only that directory to GitHub Pages when its contents change on `main`. To preview locally:

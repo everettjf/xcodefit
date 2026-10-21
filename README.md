@@ -6,12 +6,11 @@
 <p align="center">Understand what Xcode stores. Choose what to keep.</p>
 <p align="center">
   <a href="https://xnu.app/xcodefit/">Website</a> ·
-  <a href="https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.3">Download</a> ·
+  <a href="https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&amp;expanded=true">Download</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="CONTRIBUTING.md">Contribute</a>
 </p>
 <p align="center">
-  <a href="https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.3"><img src="https://img.shields.io/badge/release-1.0.3-527d42" alt="Release 1.0.3"></a>
   <img src="https://img.shields.io/badge/macOS-14%2B-555555" alt="macOS 14 or later">
   <img src="https://img.shields.io/badge/Apple%20Silicon%20%2B%20Intel-universal-555555" alt="Universal Apple Silicon and Intel">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-527d42" alt="Apache 2.0 license"></a>
@@ -35,7 +34,7 @@ Built with **SwiftUI, AppKit, and Foundation**. No third-party runtime dependenc
 brew install --cask everettjf/tap/xcodefit
 ```
 
-Or [download the signed and notarized app](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.3). Requires **macOS 14+**; supports **Apple Silicon and Intel**.
+Or [download the signed and notarized app](https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&expanded=true). Requires **macOS 14+**; supports **Apple Silicon and Intel**.
 
 To upgrade:
 
