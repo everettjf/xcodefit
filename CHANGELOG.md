@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 — build 8
+
+- Fix category navigation stretching the split view beyond the window, leaving a blank detail area and clipping the sidebar.
+- Let category descriptions adapt to available space during split-view measurement, including window resizing and inspector changes.
+
 ## 1.0.3 — build 7
 
 - Replace custom purple/cream app surfaces with native macOS window, sidebar, control and separator colors that follow system light/dark appearance.

@@ -53,6 +53,14 @@ Debug builds can launch with `--ui-fixture` to generate a separate disposable te
 open build/Build/Products/Debug/XcodeFit.app --args --ui-fixture
 ```
 
+### Category layout regression check
+
+In a Debug fixture session, open Overview, then Project Builds and every other category. Repeat with the inspector open and closed, after resizing the window, and in light/dark appearance. The category heading, table (or empty state), sidebar header, and bottom status bar must remain inside the window. Also check a language change through Settings.
+
+Category descriptions must accept the split view's proposed height. Giving them a vertically fixed size can inflate the split view's minimum height during narrow-width measurement and move its contents outside the visible window.
+
+For 1.0.4, the blank-category failure was reproduced before the fix. All 17 sidebar destinations, search/empty results, name sorting, inspector toggling, nested folder browsing, adding-location dialogs/cancellation, protection/removal, Standard selection/review, Deep archive retention/review/acknowledgment, cleanup results/history, settings/language switching, and light/dark navigation were exercised with disposable fixtures. Execution correctly skipped cleanup while Xcode was running. Actual Trash operations remain covered by the core tests; real simulator/runtime deletion was not exercised.
+
 `Tools/GenerateIcon.swift` reproduces the native AppIcon asset catalog.
 
 ## Prepare a release

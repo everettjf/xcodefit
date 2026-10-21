@@ -240,7 +240,10 @@ struct StorageListView: View {
                     Text(L10n.text("Items: %@ · %@", String(describing: (model.visibleItems.count)), String(describing: (StorageFormatting.bytes(model.visibleItems.reduce(0) { $0 + $1.size }))))).font(.system(size: 12)).foregroundStyle(.secondary).monospacedDigit()
                 }
                 if isCleanup { CleanupTierPicker() }
-                else if case .category(let category) = model.destination { Text(category.purpose).font(.system(size: 12)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
+                // Allow the description to accept the split view's proposed height. A
+                // vertically fixed Text reports a huge minimum at narrow measurement
+                // widths and can push the entire split view outside the window.
+                else if case .category(let category) = model.destination { Text(category.purpose).font(.system(size: 12)).foregroundStyle(.secondary) }
                 else if model.destination == .projects { Text(L10n.text("Browse identified projects and archived apps. The inspector shows source paths and identification details.")) .font(.system(size: 12)).foregroundStyle(.secondary) }
                 else if model.destination == .protected { Text(L10n.text("These locations and their contents are excluded from cleanup. Right-click an item to remove protection.")) .font(.system(size: 12)).foregroundStyle(.secondary) }
                 if isCleanup && model.snapshot != nil && (model.environment.toolsBusy || !model.environment.processStateKnown) {
