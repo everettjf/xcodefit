@@ -4,17 +4,14 @@ import AppKit
 extension StorageCategory {
     var tint: Color {
         switch self {
-        case .installations: FitPalette.purple
-        case .components: FitPalette.pink
-        case .builds: FitPalette.sky
-        case .caches: FitPalette.teal
-        case .packages: FitPalette.peach
-        case .archives: FitPalette.purple
-        case .simulators: FitPalette.sky
-        case .previews: FitPalette.teal
-        case .deviceSupport: FitPalette.pink
-        case .logs: FitPalette.gold
-        case .other: FitPalette.pink
+        case .installations, .archives: FitPalette.accent
+        case .components, .previews: .mint
+        case .builds: .green
+        case .caches, .deviceSupport: .teal
+        case .packages: .orange
+        case .simulators: .cyan
+        case .logs: .yellow
+        case .other: .secondary
         }
     }
 }
@@ -90,7 +87,7 @@ struct SidebarView: View {
             HStack(spacing: 9) {
                 Image("FitMascot").resizable().scaledToFit().frame(width: 49, height: 49).accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("XcodeFit").font(.system(size: 21, weight: .bold, design: .rounded)).foregroundStyle(FitPalette.purple)
+                    Text("XcodeFit").font(.system(size: 21, weight: .bold, design: .rounded)).foregroundStyle(FitPalette.accent)
                     Text(L10n.text("Developer Storage")).font(.system(size: 10)).foregroundStyle(.secondary)
                 }
                 Spacer(minLength: 0)
@@ -104,7 +101,7 @@ struct SidebarView: View {
                 Section(L10n.text("Developer Files")) {
                     ForEach(StorageCategory.allCases) { category in
                         HStack(spacing: 9) {
-                            Image(systemName: category.symbol).foregroundStyle(category.tint).frame(width: 24, height: 25).background(category.wash, in: RoundedRectangle(cornerRadius: 7))
+                            Image(systemName: category.symbol).foregroundStyle(category.tint).frame(width: 24, height: 25)
                             Text(category.title)
                                 .lineLimit(2)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -120,12 +117,11 @@ struct SidebarView: View {
                 }
             }
             .listStyle(.sidebar)
-            .scrollContentBackground(.hidden)
             if let release = model.updates.availableRelease {
                 Button { model.updatesPresented = true } label: {
                     Label(L10n.text("XcodeFit %@ is available.", release.version), systemImage: "arrow.down.circle")
                         .font(.system(size: 11, weight: .semibold)).frame(maxWidth: .infinity, alignment: .leading)
-                }.buttonStyle(.plain).foregroundStyle(FitPalette.teal).padding(.horizontal, 16).padding(.vertical, 10)
+                }.buttonStyle(.plain).foregroundStyle(FitPalette.accent).padding(.horizontal, 16).padding(.vertical, 10)
             }
             Divider().padding(.horizontal, 14)
             HStack {
@@ -138,7 +134,6 @@ struct SidebarView: View {
                 Button { model.settingsPresented = true } label: { Image(systemName: "gearshape") }.buttonStyle(.plain).help(L10n.text("Settings"))
             }.padding(16)
         }
-        .background(FitPalette.sidebar)
         .onChange(of: model.destination) { _, _ in model.search = ""; model.focusedID = nil }
     }
 }
@@ -158,15 +153,13 @@ struct OverviewView: View {
                     }
                     Spacer(minLength: 10)
                     Image("FitMascot").resizable().scaledToFit().frame(width: 86, height: 86)
-                        .background(FitPalette.peachWash, in: RoundedRectangle(cornerRadius: 25))
-                        .overlay(RoundedRectangle(cornerRadius: 25).strokeBorder(FitPalette.peach.opacity(0.25)))
                         .accessibilityHidden(true)
                 }
                 VStack(alignment: .leading, spacing: 19) {
                     HStack(alignment: .firstTextBaseline) {
                         VStack(alignment: .leading, spacing: 5) {
                             Text(model.isScanning ? L10n.text("Counting identified storage") : L10n.text("Identified Xcode Storage")).font(.system(size: 12)).foregroundStyle(.secondary)
-                            Text(StorageFormatting.bytes(model.total)).font(.system(size: 43, weight: .semibold, design: .rounded)).foregroundStyle(FitPalette.purple).tracking(-1.8).monospacedDigit().contentTransition(.numericText())
+                            Text(StorageFormatting.bytes(model.total)).font(.system(size: 43, weight: .semibold, design: .rounded)).foregroundStyle(FitPalette.accent).tracking(-1.8).monospacedDigit().contentTransition(.numericText())
                         }
                         Spacer()
                         VStack(alignment: .trailing, spacing: 7) {
@@ -179,7 +172,7 @@ struct OverviewView: View {
                     GeometryReader { geometry in
                         HStack(spacing: 3) {
                             ForEach(model.categoryTotals.filter { $0.1 > 0 }, id: \.0) { category, bytes in
-                                RoundedRectangle(cornerRadius: 6).fill(category.tint.gradient)
+                                RoundedRectangle(cornerRadius: 6).fill(category.tint)
                                     .frame(width: max(2, (geometry.size.width - 30) * CGFloat(bytes) / CGFloat(max(1, model.total))))
                                     .help("\(category.title) · \(StorageFormatting.bytes(bytes))")
                             }
@@ -192,18 +185,17 @@ struct OverviewView: View {
                     }
                 }
                 .padding(23)
-                .background(LinearGradient(colors: [FitPalette.skyWash, FitPalette.lilacWash], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 22))
-                .overlay(RoundedRectangle(cornerRadius: 22).strokeBorder(FitPalette.purple.opacity(0.2)))
+                .overlay(RoundedRectangle(cornerRadius: 22).strokeBorder(FitPalette.border))
                 HStack(spacing: 14) {
-                    Image(systemName: "sparkles").foregroundStyle(FitPalette.teal).font(.system(size: 23)).padding(10).background(FitPalette.card.opacity(0.6), in: RoundedRectangle(cornerRadius: 13))
+                    Image(systemName: "sparkles").foregroundStyle(FitPalette.accent).font(.system(size: 23)).padding(10)
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.text("A cleaner development environment, on your terms.")).font(.system(size: 13, weight: .medium))
                         Text(L10n.text("Standard or Deep. Review every cleanup before it runs.")) .font(.system(size: 11)).foregroundStyle(.secondary)
                     }
                     Spacer()
                     Button(L10n.text("Choose a Cleanup")) { model.navigate(.cleanup) }.buttonStyle(.borderedProminent).controlSize(.regular)
-                }.padding(16).background(FitPalette.mintWash, in: RoundedRectangle(cornerRadius: 18))
-                    .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(FitPalette.teal.opacity(0.2)))
+                }.padding(16)
+                    .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(FitPalette.border))
                 VStack(alignment: .leading, spacing: 13) {
                     HStack {
                         Text(L10n.text("Storage Breakdown")).font(.system(size: 14, weight: .semibold))
@@ -214,7 +206,7 @@ struct OverviewView: View {
                         ForEach(model.categoryTotals, id: \.0) { category, size in
                             Button { model.navigate(.category(category)) } label: {
                                 HStack(spacing: 13) {
-                                    Image(systemName: category.symbol).font(.system(size: 18)).foregroundStyle(category.tint).frame(width: 40, height: 42).background(category.tint.opacity(0.14), in: RoundedRectangle(cornerRadius: 13))
+                                    Image(systemName: category.symbol).font(.system(size: 18)).foregroundStyle(category.tint).frame(width: 40, height: 42)
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(category.title).font(.system(size: 12, weight: .medium)).foregroundStyle(.primary)
                                         Text(L10n.text("Items: %@", String(describing: (model.count(category))))).font(.system(size: 10)).foregroundStyle(.secondary)
@@ -222,8 +214,8 @@ struct OverviewView: View {
                                     Spacer(minLength: 0)
                                     Text(StorageFormatting.bytes(size)).font(.system(size: 14, weight: .medium, design: .rounded)).foregroundStyle(size > 0 ? .primary : .tertiary).monospacedDigit()
                                     Image(systemName: "chevron.right").font(.system(size: 9, weight: .semibold)).foregroundStyle(.tertiary)
-                                }.padding(15).background(category.wash, in: RoundedRectangle(cornerRadius: 17))
-                                    .overlay(RoundedRectangle(cornerRadius: 17).strokeBorder(category.tint.opacity(0.22)))
+                                }.padding(15)
+                                    .overlay(RoundedRectangle(cornerRadius: 17).strokeBorder(FitPalette.border))
                             }.buttonStyle(.plain)
                         }
                     }
@@ -365,16 +357,15 @@ struct CleanupTierPicker: View {
                 Button { model.changeTier(tier) } label: {
                     VStack(alignment: .leading, spacing: 7) {
                         HStack {
-                            Image(systemName: tier.symbol).font(.system(size: 17)).foregroundStyle(tier == .regular ? FitPalette.teal : FitPalette.purple).padding(8).background(FitPalette.card.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
+                            Image(systemName: tier.symbol).font(.system(size: 17)).foregroundStyle(FitPalette.accent).padding(8)
                             Text(tier.title).font(.system(size: 12, weight: .semibold))
                             Spacer(minLength: 0)
-                            Image(systemName: model.tier == tier ? "checkmark.circle.fill" : "circle").foregroundStyle(model.tier == tier ? (tier == .regular ? FitPalette.teal : FitPalette.purple) : .secondary)
+                            Image(systemName: model.tier == tier ? "checkmark.circle.fill" : "circle").foregroundStyle(model.tier == tier ? FitPalette.accent : .secondary)
                         }
                         Text(tier.subtitle).font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(2)
                     }
                     .padding(12).frame(maxWidth: .infinity, alignment: .leading)
-                    .background(tier == .regular ? FitPalette.mintWash : FitPalette.lilacWash, in: RoundedRectangle(cornerRadius: 16))
-                    .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(model.tier == tier ? (tier == .regular ? FitPalette.teal : FitPalette.purple) : FitPalette.border, lineWidth: model.tier == tier ? 2 : 1))
+                    .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(model.tier == tier ? FitPalette.accent : FitPalette.border, lineWidth: model.tier == tier ? 2 : 1))
                 }.buttonStyle(.plain).disabled(model.isCleaning)
             }
         }
@@ -388,7 +379,7 @@ struct ItemInspector: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 21) {
                 VStack(alignment: .leading, spacing: 11) {
-                    Image(systemName: item.category.symbol).font(.system(size: 29)).foregroundStyle(item.category.tint.gradient).padding(15).background(item.category.wash, in: RoundedRectangle(cornerRadius: 19))
+                    Image(systemName: item.category.symbol).font(.system(size: 29)).foregroundStyle(item.category.tint).padding(8)
                     Text(item.name).font(.system(size: 18, weight: .semibold, design: .rounded)).textSelection(.enabled)
                     Text(item.category.title).font(.system(size: 11)).foregroundStyle(.secondary)
                 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 — build 7
+
+- Replace custom purple/cream app surfaces with native macOS window, sidebar, control and separator colors that follow system light/dark appearance.
+- Remove pastel card fills, tinted icon tiles and overview gradients. Keep the mascot, with bamboo-green accents for actions, totals and selection outlines.
+- Use system category colors for charts and icons, preserving labels and explicit selected-state checkmarks. Remove obsolete custom color assets.
+- Apply the native surfaces to cleanup choices, inspectors and update panels. Cleanup and update-check behavior are unchanged.
+
 ## 1.0.2 — build 6
 
 - Add Check for Updates to the XcodeFit menu and Settings, with current version, last successful check, explicit errors, and a release-page link when a newer version is available.

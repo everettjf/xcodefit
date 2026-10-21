@@ -4,7 +4,7 @@
 
 **A little fitter. A lighter Xcode.**
 
-[Website](https://xnu.app/xcodefit/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.2) · [Apache 2.0](LICENSE)
+[Website](https://xnu.app/xcodefit/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.3) · [Apache 2.0](LICENSE)
 
 A friendly native macOS storage checkup for Xcode. See which parts are taking space, understand their purpose, and clean with care. SwiftUI, AppKit and Foundation; no third-party runtime dependencies. English by default, with Simplified Chinese, Traditional Chinese, Japanese, Korean, and a Follow System option in Settings → Language.
 
@@ -65,6 +65,10 @@ The scanner covers:
 - User-added DerivedData collections or single-project roots, archive roots, `.build`, exports and read-only folders.
 
 **Coverage is explicit.** Missing paths, inaccessible items and tool failures appear in Scan Coverage. Arbitrary script outputs, unknown Xcode installations and custom relative paths cannot be universally discovered: add their actual locations. Missing or unreadable storage is never claimed as zero completed storage.
+
+## Appearance
+
+The app follows macOS light/dark appearance using system window, sidebar, control and separator colors. Overview and cleanup cards have no custom colored fills or gradients. Bamboo green highlights actions, totals and selected cleanup outlines; category charts and icons use system colors with text labels. The mascot remains unchanged.
 
 ## Interface languages
 

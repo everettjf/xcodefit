@@ -19,7 +19,7 @@ struct UpdateStatusView: View {
                 Label(L10n.text("You’re up to date."), systemImage: "checkmark.circle")
             case .available(let release):
                 Label(L10n.text("XcodeFit %@ is available.", release.version), systemImage: "arrow.down.circle")
-                    .fontWeight(.semibold).foregroundStyle(FitPalette.teal)
+                    .fontWeight(.semibold).foregroundStyle(FitPalette.accent)
                 Link(L10n.text("Open Download Page"), destination: release.pageURL).buttonStyle(.borderedProminent)
                 Text(L10n.text("Using Homebrew? Run brew update, then brew upgrade --cask xcodefit."))
                     .font(.system(size: 11)).foregroundStyle(.secondary).textSelection(.enabled)

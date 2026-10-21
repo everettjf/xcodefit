@@ -1,6 +1,6 @@
 cask "xcodefit" do
-  version "1.0.2"
-  sha256 "41bd2f2d3abff14451f0bb3a63bf1e85351f557b8345bae02dc5a2ee8b5920a7"
+  version "1.0.3"
+  sha256 "af970cd6a90a96d3d50627bbbb2b5be35e345c3c18bdbbb6be7de3c3ac806812"
 
   url "https://github.com/everettjf/homebrew-tap/releases/download/xcodefit-v#{version}/XcodeFit-#{version}.zip"
   name "XcodeFit"

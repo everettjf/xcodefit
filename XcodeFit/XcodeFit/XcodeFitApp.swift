@@ -5,7 +5,7 @@ import AppKit
     @State private var model = AppModel()
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(model).environment(\.locale, model.language.locale).id(model.language).tint(FitPalette.purple)
+            ContentView().environment(model).environment(\.locale, model.language.locale).id(model.language).tint(FitPalette.accent)
         }
         .defaultSize(width: 1260, height: 820)
         .windowStyle(.automatic)
