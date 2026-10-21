@@ -1,8 +1,8 @@
 cask "xcodefit" do
   version "1.0.0"
-  sha256 "b05e95e2314703d7d551ff91b78e1d6a62a0f38c0449497c59dea853c0d5c182"
+  sha256 "ddc7cc3ee485d228f1f6c52658412b6f3df8b3624f7d563ebed21d2d7fc964a6"
 
-  url "https://github.com/everettjf/homebrew-tap/releases/download/xcodefit-v#{version}/XcodeFit-#{version}.zip?build=3"
+  url "https://github.com/everettjf/homebrew-tap/releases/download/xcodefit-v#{version}/XcodeFit-#{version}.zip?build=4"
   name "XcodeFit"
   desc "Give Xcode storage a checkup and clean with care"
   homepage "https://xnu.app/xcodefit/"

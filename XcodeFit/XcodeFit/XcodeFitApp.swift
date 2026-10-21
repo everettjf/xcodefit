@@ -1,10 +1,11 @@
 import SwiftUI
+import AppKit
 
 @main struct XcodeFitApp: App {
     @State private var model = AppModel()
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(model).environment(\.locale, model.language.locale).id(model.language).tint(.blue)
+            ContentView().environment(model).environment(\.locale, model.language.locale).id(model.language).tint(FitPalette.purple)
         }
         .defaultSize(width: 1260, height: 820)
         .windowStyle(.automatic)
@@ -17,6 +18,10 @@ import SwiftUI
                 Button(L10n.text("Stop Scan")) { model.cancelScan() }.disabled(!model.isScanning)
                 #if DEBUG
                 Button(L10n.text("Test folders · Not actual developer data")) { model.useTestFolders() }.disabled(model.isScanning || model.isCleaning)
+                Divider()
+                Button(L10n.text("Preview Light Appearance")) { NSApp.appearance = NSAppearance(named: .aqua) }
+                Button(L10n.text("Preview Dark Appearance")) { NSApp.appearance = NSAppearance(named: .darkAqua) }
+                Button(L10n.text("Follow System")) { NSApp.appearance = nil }
                 #endif
                 Button(L10n.text("Add Scan Location…")) { model.addFolderPresented = true }.disabled(model.isScanning || model.isCleaning)
             }

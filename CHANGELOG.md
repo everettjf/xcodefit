@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 — build 4 (colorful checkup)
+
+- Refresh the website with candy-colored stickers, playful rounded type, mint mascot backdrop, hearts/stars, and brighter light/dark palettes.
+- Add coordinated adaptive colors to the app: mascot branding, colorful category cards, pastel storage summary, and mint/purple cleanup modes.
+- Preserve native readability, reduced-motion behavior, cleanup review, and safety warnings.
+
+
 ## 1.0.0 — build 3 (XcodeFit)
 
 - Rename the app, repository, Xcode project, source paths, bundle ID, Swift package and Homebrew cask to XcodeFit.
