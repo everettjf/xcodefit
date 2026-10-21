@@ -130,8 +130,15 @@ final class AppModel {
         if let fixtureRoot {
             configuration = ScanConfiguration(home: fixtureRoot, systemDeveloper: fixtureRoot.appendingPathComponent("system"), applicationRoots: [], discoverEnvironment: false)
         }
+        #if DEBUG
+        let scanEventDelay: TimeInterval = isFixture && ProcessInfo.processInfo.arguments.contains("--ui-slow-scan") ? 0.2 : 0
+        #else
+        let scanEventDelay: TimeInterval = 0
+        #endif
         let task = Task.detached(priority: .utility) { [configuration, model = self] in
             StorageScanner(configuration: configuration).scan { event in
+                // Slow only disposable Debug fixtures so scan/cancel UI can be inspected.
+                if scanEventDelay > 0 { Thread.sleep(forTimeInterval: scanEventDelay) }
                 Task { @MainActor in
                     guard model.scanID == identifier, model.isScanning else { return }
                     switch event {

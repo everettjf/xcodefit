@@ -63,9 +63,11 @@ Run the native history layout checks with:
 scripts/check-ui-layout.sh
 ```
 
-This compiles the actual app views into a separate test executable, uses isolated fixture preferences, and measures empty/populated history at three available content sizes. It asserts that the page starts at the top, fills the width, and meets a status bar anchored to the bottom. It does not scan or clean real developer folders. These checks reject the pre-1.0.6 empty-history layout.
+This compiles the actual app views into a separate test executable, uses isolated fixture preferences, and measures empty/populated history, both scanning and idle, at three available content sizes. It asserts that the page starts at the top (below the scan banner when active), fills the width, and meets a status bar anchored to the bottom. The banner must be prominent while scanning and absent when idle. It does not scan or clean real developer folders. These checks reject the pre-1.0.6 empty-history layout.
 
 For 1.0.6, all 17 destinations were clicked and captured in dark appearance at the normal window size and in light appearance after maximizing. Each capture was visually checked for header placement, visible rows or a centered empty state, and a bottom-aligned status bar. Populated history, inspector visibility, settings, and archive-retention panels were also inspected. Cleanup execution was also checked with active tools: all five fixture items were skipped and recorded with the running-tools reason. The native Trash integration test separately moved a disposable file into the macOS Trash, verified the recorded destination, and restored it successfully. Screenshots use disposable fixture data; local verification captures are in the ignored `build/ui-review.noindex/` directory.
+
+For 1.0.7, the scanning banner was verified on all 17 destinations, including history and coverage. Completion hides it; using its Stop Scan button hides it and leaves a partial-results notice. To inspect or capture that state with disposable data, launch a Debug build with `--ui-fixture --ui-slow-scan`. The extra flag slows only fixture events and has no effect in Release builds or real scans.
 
 Category descriptions must accept the split view's proposed height. Giving them a vertically fixed size can inflate the split view's minimum height during narrow-width measurement and move its contents outside the visible window.
 

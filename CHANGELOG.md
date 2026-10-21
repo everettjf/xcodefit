@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.7 — build 11
+
+- Show a prominent scanning banner on every page, including an activity indicator, current scan item, discovered-item count, and Stop Scan button. Hide it after completion or cancellation; retain the partial-results notice when canceled.
+- Translate the new scan controls in all five languages and keep the indicator indeterminate rather than implying a known completion percentage.
+- Extend native layout checks to 12 empty/populated, scanning/idle, and window-size combinations. Add a Debug-only slow fixture scan for checking scan/cancel UI without real developer data.
+
 ## 1.0.6 — build 10
 
 - Keep each destination's content stretched to the available detail area, with the scan status bar anchored at the window bottom.

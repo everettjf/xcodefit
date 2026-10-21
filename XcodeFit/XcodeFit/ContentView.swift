@@ -27,6 +27,7 @@ struct ContentView: View {
         } detail: {
             HStack(spacing: 0) {
                 VStack(spacing: 0) {
+                    if model.isScanning { ScanProgressBanner() }
                     Group {
                         switch model.destination {
                         case .overview: OverviewView()
@@ -425,6 +426,31 @@ struct ItemInspector: View {
             Text(label).font(.system(size: 10, weight: .semibold)).foregroundStyle(.secondary)
             Text(text).font(.system(size: 12)).textSelection(.enabled).fixedSize(horizontal: false, vertical: true)
         }
+    }
+}
+
+struct ScanProgressBanner: View {
+    @Environment(AppModel.self) private var model
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 13) {
+                ProgressView().controlSize(.regular).frame(width: 28, height: 28)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(L10n.text("Scanning Developer Storage"))
+                        .font(.system(size: 15, weight: .semibold))
+                    Text(model.progress).font(.system(size: 11)).foregroundStyle(.secondary)
+                        .lineLimit(1).truncationMode(.middle)
+                }
+                Spacer(minLength: 12)
+                Text(L10n.text("Items found: %@", String(model.items.count)))
+                    .font(.system(size: 12, weight: .medium)).monospacedDigit()
+                Button(L10n.text("Stop Scan")) { model.cancelScan() }.controlSize(.regular)
+            }
+            ProgressView().progressViewStyle(.linear).tint(FitPalette.accent)
+        }
+        .padding(.horizontal, 22).padding(.vertical, 14)
+        .background(FitPalette.accent.opacity(0.08))
+        .overlay(alignment: .bottom) { Divider() }
     }
 }
 
