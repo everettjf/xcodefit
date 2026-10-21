@@ -4,7 +4,7 @@
 
 **A little fitter. A lighter Xcode.**
 
-[Website](https://xnu.app/xcodefit/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.1) · [Apache 2.0](LICENSE)
+[Website](https://xnu.app/xcodefit/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.2) · [Apache 2.0](LICENSE)
 
 A friendly native macOS storage checkup for Xcode. See which parts are taking space, understand their purpose, and clean with care. SwiftUI, AppKit and Foundation; no third-party runtime dependencies. English by default, with Simplified Chinese, Traditional Chinese, Japanese, Korean, and a Follow System option in Settings → Language.
 
@@ -17,6 +17,12 @@ brew install --cask everettjf/tap/xcodefit
 [Download and release notes](https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&expanded=true). Source code is public under Apache 2.0. Release binaries are distributed through the Homebrew tap.
 
 Requires macOS 14 or later. The release application supports Apple Silicon and Intel, is signed with Developer ID, and is notarized by Apple. Homebrew updates are available with `brew upgrade --cask xcodefit`.
+
+## Check for updates
+
+Use **XcodeFit → Check for Updates…** or **Settings → Software Updates**. The app checks public GitHub release metadata at launch or when returning to the app, at most once a day. You can turn automatic checks off; manual checks always remain available. No file data is sent, and updates are never installed automatically.
+
+A newer stable XcodeFit version appears in the sidebar and update panel, with a link to its release page and Homebrew upgrade instructions. Cached release information and the last successful check survive restarts. Checks filter XcodeFit tags and downloadable ZIP assets from the shared `everettjf/homebrew-tap` repository, handle pagination, and distinguish network/rate-limit errors from an up-to-date result. This does not use the shared repository’s global latest-release pointer.
 
 ## Upgrading from XcodeSize
 

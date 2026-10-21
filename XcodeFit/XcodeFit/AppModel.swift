@@ -37,6 +37,8 @@ final class AppModel {
     var results: [CleanupRecord]?
     var errorMessage: String?
     var browseURL: URL?
+    let updates = UpdateChecker(defaults: L10n.preferences)
+    var updatesPresented = false
     var settingsPresented = false
     var addFolderPresented = false
     var archiveRetentionPresented = false

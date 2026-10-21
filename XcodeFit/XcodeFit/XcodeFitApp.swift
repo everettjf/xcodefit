@@ -10,6 +10,12 @@ import AppKit
         .defaultSize(width: 1260, height: 820)
         .windowStyle(.automatic)
         .commands {
+            CommandGroup(after: .appInfo) {
+                Button(L10n.text("Check for Updates…")) {
+                    model.updatesPresented = true
+                    Task { await model.updates.check() }
+                }.disabled(model.updates.isChecking)
+            }
             CommandGroup(replacing: .appSettings) {
                 Button(L10n.text("Settings…")) { model.settingsPresented = true }.keyboardShortcut(",", modifiers: .command)
             }

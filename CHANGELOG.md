@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 — build 6
+
+- Add Check for Updates to the XcodeFit menu and Settings, with current version, last successful check, explicit errors, and a release-page link when a newer version is available.
+- Check GitHub at launch or when returning to the app, at most daily, with a persistent opt-out and cached release metadata. Manual checks remain available.
+- Filter stable downloadable XcodeFit releases in the shared Homebrew tap, compare numeric versions, handle pagination and rate limits, and show a sidebar notice for available updates.
+- Localize update controls and messages in all five languages. No file data is sent, and updates are not installed automatically.
+
 ## 1.0.1 — build 5
 
 - Refresh the website with bamboo greens, soft ivory surfaces, and a coordinated forest-green dark appearance.

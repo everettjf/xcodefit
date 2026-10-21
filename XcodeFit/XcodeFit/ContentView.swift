@@ -21,6 +21,7 @@ extension StorageCategory {
 
 struct ContentView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.scenePhase) private var scenePhase
     var body: some View {
         @Bindable var model = model
         NavigationSplitView {
@@ -64,6 +65,7 @@ struct ContentView: View {
         .sheet(item: $model.plan) { plan in CleanupReviewView(plan: plan) }
         .sheet(isPresented: $model.addFolderPresented) { AddFolderView() }
         .sheet(isPresented: $model.archiveRetentionPresented) { ArchiveRetentionView() }
+        .sheet(isPresented: $model.updatesPresented) { UpdateCheckView() }
         .sheet(isPresented: $model.settingsPresented) { PreferencesView() }
         .sheet(isPresented: Binding(get: { model.results != nil }, set: { if !$0 { model.results = nil } })) { CleanupResultsView() }
         .sheet(item: $model.browseURL) { url in FolderBrowserView(root: url) }
@@ -71,6 +73,10 @@ struct ContentView: View {
             Button(L10n.text("OK"), role: .cancel) { model.errorMessage = nil }
         } message: { Text(model.errorMessage ?? "") }
         .task { if model.snapshot == nil && !model.isScanning { model.startScan() } }
+        .task { await model.updates.check(automatically: true) }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { Task { await model.updates.check(automatically: true) } }
+        }
     }
 }
 
@@ -115,6 +121,12 @@ struct SidebarView: View {
             }
             .listStyle(.sidebar)
             .scrollContentBackground(.hidden)
+            if let release = model.updates.availableRelease {
+                Button { model.updatesPresented = true } label: {
+                    Label(L10n.text("XcodeFit %@ is available.", release.version), systemImage: "arrow.down.circle")
+                        .font(.system(size: 11, weight: .semibold)).frame(maxWidth: .infinity, alignment: .leading)
+                }.buttonStyle(.plain).foregroundStyle(FitPalette.teal).padding(.horizontal, 16).padding(.vertical, 10)
+            }
             Divider().padding(.horizontal, 14)
             HStack {
                 Image(systemName: "internaldrive").foregroundStyle(.secondary)

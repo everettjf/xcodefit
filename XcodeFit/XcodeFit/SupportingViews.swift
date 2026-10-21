@@ -222,6 +222,7 @@ struct PreferencesView: View {
                     Text(L10n.text("File names, paths, project names, and tool identifiers are never translated."))
                         .font(.system(size: 11)).foregroundStyle(.secondary)
                 }
+                Section(L10n.text("Software Updates")) { UpdateStatusView() }
                 Section(L10n.text("Retention Rules")) {
                     Stepper(L10n.text("Keep logs for at least %@ days", String(describing: (model.settings.logDays))), value: $model.settings.logDays, in: 7...365, step: 1)
                     Stepper(L10n.text("Standard Clean: builds and dependencies idle for %@ days", String(describing: (model.settings.idleDays))), value: $model.settings.idleDays, in: 30...730, step: 1)
@@ -234,7 +235,7 @@ struct PreferencesView: View {
                 }
             }.formStyle(.grouped)
             HStack { Spacer(); Button(L10n.text("Done")) { model.settingsPresented = false; dismiss(); model.saveSettings(language: pendingLanguage) }.keyboardShortcut(.defaultAction).disabled(model.isCleaning) }
-        }.padding(24).frame(width: 630, height: 560)
+        }.padding(24).frame(width: 630, height: 680)
     }
 }
 
