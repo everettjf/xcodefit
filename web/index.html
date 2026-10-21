@@ -9,11 +9,11 @@
   <meta name="description" content="Get your Xcode storage in shape. Find bulky builds, caches, simulators and archives, understand their purpose, and clean up with care. Free and open source for Mac.">
   <link rel="canonical" href="https://xnu.app/xcodefit/">
   <meta property="og:title" content="XcodeFit — A little fitter. A lighter Xcode."><meta property="og:description" content="A lighter, fitter home for Xcode. See what's taking space, understand what matters, and choose what to keep."><meta property="og:type" content="website"><meta property="og:url" content="https://xnu.app/xcodefit/"><meta property="og:image" content="https://xnu.app/xcodefit/assets/app-icon.png">
-  <link rel="icon" type="image/png" href="assets/app-icon.png"><link rel="stylesheet" href="styles.css?v=ef82c9d3b394"><script src="app.js?v=f2d037b9e896" defer></script>
+  <link rel="icon" type="image/png" href="assets/app-icon.png"><link rel="stylesheet" href="styles.css?v=f1b9e114cba8"><script src="app.js?v=5af89e132261" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header wrap"><a class="brand" href="#" aria-label="XcodeFit home"><img src="assets/app-icon.png" width="48" height="48" alt=""><span>XcodeFit<span class="brand-dot">.</span></span></a><nav aria-label="Main navigation"><a href="#checkup">Storage fitness</a><a href="#care">Clean with care</a><a class="github-link" href="https://github.com/everettjf/xcodefit">GitHub ↗</a><a class="button small" href="#download">Get XcodeFit <span aria-hidden="true">↓</span></a></nav></header>
+<header class="site-header wrap"><a class="brand" href="#" aria-label="XcodeFit home"><img src="assets/app-icon.png" width="48" height="48" alt=""><span>XcodeFit<span class="brand-dot">.</span></span></a><nav aria-label="Main navigation"><a href="#app">The app</a><a href="#checkup">Storage fitness</a><a href="#care">Clean with care</a><a class="github-link" href="https://github.com/everettjf/xcodefit">GitHub ↗</a><a class="button small" href="#download">Get XcodeFit <span aria-hidden="true">↓</span></a></nav></header>
 <main id="main">
 <section class="hero wrap" aria-labelledby="hero-title">
   <div class="hero-copy"><a class="eyebrow release-link" href="https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.3"><span class="status-dot"></span> A HEALTHIER HOME FOR YOUR NEXT BUILD <span aria-hidden="true">↗</span></a>
@@ -35,13 +35,31 @@
     <div class="scene-footer"><span class="plus-mark" aria-hidden="true">+</span><span id="scan-status" role="status">A closer look, before a clean start.</span><span class="scene-coordinates" aria-hidden="true">XF / 01</span></div>
   </div>
 </section>
+<section class="app-showcase wrap" id="app" aria-labelledby="app-title">
+  <div class="app-showcase-heading">
+    <div><span class="eyebrow">MEET THE MAC APP</span><h2 id="app-title">Less guesswork.<br>More room to build.</h2></div>
+    <div class="app-showcase-copy"><p>Your Xcode storage, clearly laid out. Browse by category or project, understand each folder, and review what goes.</p><span class="app-native-note"><span class="status-dot" aria-hidden="true"></span>Native macOS · Light &amp; dark</span></div>
+  </div>
+  <figure class="app-preview">
+    <div class="app-preview-toolbar"><span class="app-preview-label">XcodeFit / Overview</span><div class="appearance-picker" role="group" aria-label="Screenshot appearance"><button type="button" data-app-theme="auto" aria-pressed="true">Auto</button><button type="button" data-app-theme="light" aria-pressed="false">Light</button><button type="button" data-app-theme="dark" aria-pressed="false">Dark</button></div></div>
+    <a class="app-screenshot-link" href="assets/screenshots/overview-light.jpg" id="app-screenshot-link" target="_blank" rel="noopener" aria-label="Open full-size XcodeFit overview screenshot">
+      <picture id="app-overview-picture">
+        <source id="app-overview-dark" media="(prefers-color-scheme: dark)" srcset="assets/screenshots/overview-dark.jpg">
+        <img src="assets/screenshots/overview-light.jpg" alt="XcodeFit’s native overview with storage categories, folder sizes, scan coverage, and cleanup access. Captured using isolated test folders." width="2520" height="1640" loading="lazy" decoding="async">
+      </picture>
+      <span class="app-screenshot-hint" aria-hidden="true">View full size ↗</span>
+    </a>
+    <figcaption><span>Real app. Isolated test folders. Sample sizes are not cleanup results.</span><span id="preview-appearance" role="status">Follows your system appearance</span></figcaption>
+  </figure>
+  <div class="app-highlights"><div><span aria-hidden="true">↳</span><h3>Find the bulky parts.</h3><p>Categories, projects, paths, and ownership in one native window.</p></div><div><span aria-hidden="true">✓</span><h3>Keep what matters.</h3><p>Protect locations and make informed choices about release archives.</p></div><div><span aria-hidden="true">✧</span><h3>Clean on your terms.</h3><p>Standard or Deep. Every cleanup starts with a review.</p></div></div>
+</section>
 <section class="report-section wrap" id="checkup" aria-labelledby="report-title">
   <div class="report-heading"><span class="eyebrow">01 / UNDERSTAND THE WEIGHT</span><h2 id="report-title">Every part has a purpose.</h2><p>Size tells half the story. Get to know what each folder does, how it got there, and what happens if it goes.</p></div>
   <div class="report" aria-label="Interactive example report">
     <div class="report-top"><span><span class="plus-mark" aria-hidden="true">+</span> STORAGE FITNESS</span><span class="sample-tag">Illustrative data · not a scan of your Mac</span></div>
     <div class="report-content"><div class="report-summary"><span class="eyebrow">IDENTIFIED STORAGE</span><div class="total">108.6 <span>GB</span></div><div class="storage-bar" aria-label="Example storage: simulators 46.2 GB, builds 28.4 GB, caches 18.7 GB, archives 15.3 GB"><i class="peach"></i><i class="blue"></i><i class="mint"></i><i class="violet"></i></div><p>Four example areas. The app covers 11 categories, including tools, device support, previews, logs, and more.</p><div class="report-tabs" role="tablist" aria-label="Storage area"><button id="tab-builds" data-report-part="builds" role="tab" aria-selected="true" aria-controls="part-detail">Builds</button><button id="tab-caches" data-report-part="caches" role="tab" aria-selected="false" aria-controls="part-detail" tabindex="-1">Caches</button><button id="tab-simulators" data-report-part="simulators" role="tab" aria-selected="false" aria-controls="part-detail" tabindex="-1">Simulators</button><button id="tab-archives" data-report-part="archives" role="tab" aria-selected="false" aria-controls="part-detail" tabindex="-1">Archives</button></div></div>
     <div class="part-detail" id="part-detail" role="tabpanel" aria-labelledby="tab-builds" tabindex="0"><div class="detail-title"><span class="part-symbol blue" id="detail-icon" aria-hidden="true">▣</span><span class="detail-tag" id="detail-tag">REBUILDABLE · INSPECT FIRST</span></div><h3 id="detail-name">Build products & indexes</h3><code id="detail-path">~/Library/Developer/Xcode/DerivedData/</code><p id="detail-description">The apps, intermediate files, and source indexes your projects leave behind. Idle data can make room for the next build; rebuilding and indexing take time.</p><div class="care-note"><span aria-hidden="true">↳</span><span id="detail-care">Build folders containing dSYMs stay out of Standard Clean. Those symbols may be needed for a particular released build.</span></div></div></div>
-    <div class="report-bottom"><span><span class="status-dot"></span> Scanning and cleanup run locally.</span><a href="https://github.com/everettjf/xcodefit#browse">See what the app checks ↗</a></div>
+    <div class="report-bottom"><span><span class="status-dot"></span> Scanning and cleanup run locally.</span><a href="https://github.com/everettjf/xcodefit/blob/main/docs/STORAGE.md#browse">See what the app checks ↗</a></div>
   </div>
 </section>
 <section class="process wrap" aria-label="How XcodeFit works"><div><span class="step-number">01</span><h3>Look inside.</h3><p>Browse real folders by category or project. See sizes, paths, and ownership.</p></div><div><span class="step-number">02</span><h3>Know what matters.</h3><p>Read the purpose and cleanup impact. Protect locations you want to keep.</p></div><div><span class="step-number">03</span><h3>Lighten the load.</h3><p>Review your exact selection. Ordinary files move to Trash, with a clear record of what happened.</p></div></section>
