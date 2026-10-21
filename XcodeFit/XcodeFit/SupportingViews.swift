@@ -161,6 +161,7 @@ struct HistoryView: View {
             Divider()
             if model.history.isEmpty {
                 ContentUnavailableView(L10n.text("No Cleanup History Yet"), systemImage: "clock.arrow.circlepath", description: Text(L10n.text("Cleanup paths, methods, and results will appear here.")))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List(model.history) { record in
                     HStack(alignment: .top, spacing: 12) {

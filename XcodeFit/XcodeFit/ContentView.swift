@@ -27,12 +27,15 @@ struct ContentView: View {
         } detail: {
             HStack(spacing: 0) {
                 VStack(spacing: 0) {
-                    switch model.destination {
-                    case .overview: OverviewView()
-                    case .coverage: CoverageView()
-                    case .history: HistoryView()
-                    default: StorageListView()
+                    Group {
+                        switch model.destination {
+                        case .overview: OverviewView()
+                        case .coverage: CoverageView()
+                        case .history: HistoryView()
+                        default: StorageListView()
+                        }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     ScanStatusBar()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

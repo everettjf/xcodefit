@@ -53,9 +53,19 @@ Debug builds can launch with `--ui-fixture` to generate a separate disposable te
 open build/Build/Products/Debug/XcodeFit.app --args --ui-fixture
 ```
 
-### Category layout regression check
+### Interface layout regression checks
 
 In a Debug fixture session, open Overview, then Project Builds and every other category. Repeat with the inspector open and closed, after resizing the window, and in light/dark appearance. The category heading, table (or empty state), sidebar header, and bottom status bar must remain inside the window. Also check a language change through Settings. Select two different rows in succession and confirm the inspector name, ownership, identification, path, and sizes all match the current row. Selectable text must not retain the previous item.
+
+Run the native history layout checks with:
+
+```sh
+scripts/check-ui-layout.sh
+```
+
+This compiles the actual app views into a separate test executable, uses isolated fixture preferences, and measures empty/populated history at three available content sizes. It asserts that the page starts at the top, fills the width, and meets a status bar anchored to the bottom. It does not scan or clean real developer folders. These checks reject the pre-1.0.6 empty-history layout.
+
+For 1.0.6, all 17 destinations were clicked and captured in dark appearance at the normal window size and in light appearance after maximizing. Each capture was visually checked for header placement, visible rows or a centered empty state, and a bottom-aligned status bar. Populated history, inspector visibility, settings, and archive-retention panels were also inspected. Cleanup execution was also checked with active tools: all five fixture items were skipped and recorded with the running-tools reason. The native Trash integration test separately moved a disposable file into the macOS Trash, verified the recorded destination, and restored it successfully. Screenshots use disposable fixture data; local verification captures are in the ignored `build/ui-review.noindex/` directory.
 
 Category descriptions must accept the split view's proposed height. Giving them a vertically fixed size can inflate the split view's minimum height during narrow-width measurement and move its contents outside the visible window.
 

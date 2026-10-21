@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 — build 10
+
+- Keep each destination's content stretched to the available detail area, with the scan status bar anchored at the window bottom.
+- Center the empty cleanup-history message within the remaining content area while keeping its header at the top.
+- Add native layout regression checks for empty and populated history at three window sizes. Verify the pre-fix implementation fails those checks.
+
 ## 1.0.5 — build 9
 
 - Recreate the item inspector when selection changes so selectable names, ownership details, and paths cannot retain text from the previous item.
