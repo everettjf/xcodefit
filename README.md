@@ -12,7 +12,6 @@
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-14%2B-555555" alt="macOS 14 or later">
-  <img src="https://img.shields.io/badge/Apple%20Silicon%20%2B%20Intel-universal-555555" alt="Universal Apple Silicon and Intel">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-527d42" alt="Apache 2.0 license"></a>
 </p>
 
@@ -34,7 +33,12 @@ Built with **SwiftUI, AppKit, and Foundation**. No third-party runtime dependenc
 brew install --cask everettjf/tap/xcodefit
 ```
 
-Or [download the signed and notarized app](https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&expanded=true). Requires **macOS 14+**; supports **Apple Silicon and Intel**.
+Or [download the signed and notarized app](https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&expanded=true). Requires **macOS 14+**. **Apple Silicon is the primary platform.**
+
+| Package | Contents and scope |
+| --- | --- |
+| **Apple Silicon** | `arm64` only. Primary package; selected automatically by Homebrew on Apple Silicon. |
+| **Universal** | `arm64` + `x86_64`. Optional download; **Intel execution is untested**. Architecture coverage is not a claim of verified compatibility. |
 
 To upgrade:
 
@@ -102,7 +106,9 @@ Use isolated sample folders when exploring the UI:
 open build/Build/Products/Debug/XcodeFit.app --args --ui-fixture
 ```
 
-The first releases were built and verified on Apple Silicon. Intel and macOS 14 execution have not been tested on hardware. Release binaries include both architectures; source builds require the installed Xcode and SDK to support this project.
+Intel execution and the oldest supported macOS version have not been verified on hardware.
+
+Source builds require the installed Xcode and SDK to support this project. Packaging does not run runtime tests by default.
 
 More: [development, localization, release, and website guide](docs/DEVELOPMENT.md).
 

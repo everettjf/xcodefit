@@ -57,7 +57,20 @@ open build/Build/Products/Debug/XcodeFit.app --args --ui-fixture
 
 ## Prepare a release
 
-`scripts/build-release.sh` runs the tests, builds both CPU architectures, signs with Developer ID and hardened runtime, submits to Apple, staples the ticket, and verifies the exact app extracted from the final ZIP. It writes `dist/<version>/XcodeFit-<version>.zip` and `SHA256SUMS`; it does not publish anything.
+`scripts/build-release.sh` builds a Universal executable and packages two separately signed, notarized, and stapled apps:
+
+- `XcodeFit-<version>-arm64.zip`: Apple Silicon only (`arm64`).
+- `XcodeFit-<version>.zip`: Universal (`arm64` + `x86_64`). The existing unsuffixed name remains for compatibility with older download and update-check clients.
+
+Each ZIP is extracted for signature, notarization ticket, Gatekeeper and architecture checks. This is package validation, not Intel runtime or compatibility testing. Intel execution is untested; do not describe it as verified support. `SHA256SUMS` covers both packages. The script does not publish anything and does not run runtime tests by default. Set `RUN_TESTS=1` only when you explicitly want to run the core tests as well.
+
+To add an Apple Silicon package from an existing signed app without rebuilding or changing the Universal package:
+
+```sh
+scripts/build-release.sh --arm64-from /path/to/XcodeFit.app
+```
+
+The app version must match the project. Output goes into a new `dist/<version>-arm64/` directory. Thinning invalidates the original signature, so the arm64 app is signed and notarized again. Never overwrite the original Universal ZIP; merge both checksums when publishing the additional asset.
 
 Provide a `NOTARY_KEYCHAIN_PROFILE`, or `APPLE_ID`, `APPLE_TEAM_ID`, and `APPLE_SPECIFIC_PASSWORD` in the environment. `SIGNING_IDENTITY` can select a particular Developer ID identity; otherwise the first available Developer ID Application identity is used. Never commit credentials. Release versions come from `MARKETING_VERSION` in the Xcode project. The Homebrew cask is mirrored under `packaging/homebrew/Casks/xcodefit.rb`.
 
