@@ -26,7 +26,7 @@ document.getElementById('start-checkup').addEventListener('click',()=>{
  const scene=document.querySelector('.checkup-scene');const status=document.getElementById('scan-status');const trigger=document.getElementById('start-checkup');
  scene.classList.add('is-scanning');trigger.disabled=true;status.textContent='Checking the example storage areas…';
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- setTimeout(()=>{scene.classList.remove('is-scanning');checkupRunning=false;trigger.disabled=false;selectArea('builds');status.textContent='Example checkup ready. Your real files stay untouched.';document.getElementById('checkup').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});document.getElementById('part-detail').focus({preventScroll:true});},reduce?100:2700);
+ setTimeout(()=>{scene.classList.remove('is-scanning');checkupRunning=false;trigger.disabled=false;selectArea('builds');status.textContent='Example fitness scan ready. Your real files stay untouched.';document.getElementById('checkup').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});document.getElementById('part-detail').focus({preventScroll:true});},reduce?100:2700);
 });
 document.getElementById('copy-command').addEventListener('click',async()=>{
  const status=document.getElementById('copy-status');
