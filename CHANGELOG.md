@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 — build 9
+
+- Recreate the item inspector when selection changes so selectable names, ownership details, and paths cannot retain text from the previous item.
+- Includes the category layout fix from 1.0.4.
+
 ## 1.0.4 — build 8
 
 - Fix category navigation stretching the split view beyond the window, leaving a blank detail area and clipping the sidebar.

@@ -39,6 +39,7 @@ struct ContentView: View {
                 if model.inspectorVisible, let item = model.focused {
                     Divider()
                     ItemInspector(item: item)
+                        .id(item.id)
                         .frame(width: 285)
                 }
             }
