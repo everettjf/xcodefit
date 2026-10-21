@@ -12,7 +12,7 @@ enum CommandRunner {
     /// File-backed output avoids pipe deadlocks for large simctl JSON responses.
     static func run(_ executable: String, _ arguments: [String], timeout: TimeInterval = 20) -> CommandResult {
         let fm = FileManager.default
-        let directory = fm.temporaryDirectory.appendingPathComponent("XcodeSize-command-" + UUID().uuidString)
+        let directory = fm.temporaryDirectory.appendingPathComponent("XcodeFit-command-" + UUID().uuidString)
         do {
             try fm.createDirectory(at: directory, withIntermediateDirectories: true)
             defer { try? fm.removeItem(at: directory) }

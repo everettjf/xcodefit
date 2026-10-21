@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-source = root / 'XcodeSize/XcodeSize'
+source = root / 'XcodeFit/XcodeFit'
 catalog = json.loads((source / 'Core/Resources/Localizable.xcstrings').read_text())
 assert catalog['sourceLanguage'] == 'en', 'The source language must remain English'
 strings = catalog['strings']

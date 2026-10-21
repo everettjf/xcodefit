@@ -5,7 +5,7 @@ import Foundation
 enum DebugFixture {
     static func make() throws -> URL {
         let fm = FileManager.default
-        let root = fm.temporaryDirectory.appendingPathComponent("XcodeSizeUIFixture-" + UUID().uuidString).resolvingSymlinksInPath()
+        let root = fm.temporaryDirectory.appendingPathComponent("XcodeFitUIFixture-" + UUID().uuidString).resolvingSymlinksInPath()
         let files: [(String, Int)] = [
             ("Library/Developer/Xcode/DerivedData/Atlas-hash/Build/Products/Atlas.app/Contents/MacOS/Atlas", 1048576),
             ("Library/Developer/Xcode/DerivedData/Atlas-hash/Index.noindex/DataStore/index", 262144),

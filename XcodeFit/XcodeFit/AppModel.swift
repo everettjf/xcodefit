@@ -61,10 +61,11 @@ final class AppModel {
     var isFixture: Bool { fixtureRoot != nil }
 
     init() {
+        BrandMigration.prepareStandardPreferences()
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("--ui-fixture") {
             fixtureRoot = try? DebugFixture.make()
-            defaults = UserDefaults(suiteName: "XcodeSize.UIFixture") ?? .standard
+            defaults = UserDefaults(suiteName: "XcodeFit.UIFixture") ?? .standard
         } else { defaults = .standard }
         #else
         defaults = .standard
@@ -80,7 +81,7 @@ final class AppModel {
         guard !isCleaning, !isScanning else { return }
         do {
             fixtureRoot = try DebugFixture.make()
-            defaults = UserDefaults(suiteName: "XcodeSize.UIFixture") ?? .standard
+            defaults = UserDefaults(suiteName: "XcodeFit.UIFixture") ?? .standard
             customRoots = []; protectedPaths = []; history = []; selected = []; settings = CleanupSettings()
             startScan()
         } catch { errorMessage = error.localizedDescription }
@@ -242,6 +243,6 @@ final class AppModel {
             diskBytes = (attributes[.systemSize] as? NSNumber)?.int64Value ?? 0
         }
     }
-    private func decode<T: Decodable>(_ type: T.Type, key: String) -> T? { defaults.data(forKey: "XcodeSize." + key).flatMap { try? JSONDecoder().decode(type, from: $0) } }
-    private func save<T: Encodable>(_ value: T, key: String) { if let data = try? JSONEncoder().encode(value) { defaults.set(data, forKey: "XcodeSize." + key) } }
+    private func decode<T: Decodable>(_ type: T.Type, key: String) -> T? { defaults.data(forKey: "XcodeFit." + key).flatMap { try? JSONDecoder().decode(type, from: $0) } }
+    private func save<T: Encodable>(_ value: T, key: String) { if let data = try? JSONEncoder().encode(value) { defaults.set(data, forKey: "XcodeFit." + key) } }
 }

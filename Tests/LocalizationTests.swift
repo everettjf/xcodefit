@@ -1,5 +1,5 @@
 import XCTest
-@testable import XcodeSizeCore
+@testable import XcodeFitCore
 
 final class LocalizationTests: XCTestCase {
     func testEnglishIsDefaultAndInvalidPreferencesFallBackToEnglish() {
@@ -63,7 +63,7 @@ final class LocalizationTests: XCTestCase {
 
     func testCatalogIsCompleteAndFormatArgumentsMatchInAllFiveLanguages() throws {
         let repository = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
-        let catalog = repository.appendingPathComponent("XcodeSize/XcodeSize/Core/Resources/Localizable.xcstrings")
+        let catalog = repository.appendingPathComponent("XcodeFit/XcodeFit/Core/Resources/Localizable.xcstrings")
         let json = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: catalog)) as? [String: Any])
         XCTAssertEqual(json["sourceLanguage"] as? String, "en")
         let strings = try XCTUnwrap(json["strings"] as? [String: [String: Any]])

@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		000000000000000000000120 /* XcodeSize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XcodeSize.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000000120 /* XcodeFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XcodeFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		000000000000000000000010 /* XcodeSize */ = {
+		000000000000000000000010 /* XcodeFit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = XcodeSize;
+			path = XcodeFit;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -30,7 +30,7 @@
 		000000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				000000000000000000000010 /* XcodeSize */,
+				000000000000000000000010 /* XcodeFit */,
 				000000000000000000000020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -38,7 +38,7 @@
 		000000000000000000000020 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				000000000000000000000120 /* XcodeSize.app */,
+				000000000000000000000120 /* XcodeFit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -46,9 +46,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		000000000000000100000000 /* XcodeSize */ = {
+		000000000000000100000000 /* XcodeFit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000000000000110000000 /* Build configuration list for PBXNativeTarget "XcodeSize" */;
+			buildConfigurationList = 000000000000000110000000 /* Build configuration list for PBXNativeTarget "XcodeFit" */;
 			buildPhases = (
 				000000000000000120000000 /* Sources */,
 				000000000000000130000000 /* Frameworks */,
@@ -57,11 +57,11 @@
 			buildRules = (
 			);
 			fileSystemSynchronizedGroups = (
-				000000000000000000000010 /* XcodeSize */,
+				000000000000000000000010 /* XcodeFit */,
 			);
-			name = XcodeSize;
-			productName = MyApp;
-			productReference = 000000000000000000000120 /* XcodeSize.app */;
+			name = XcodeFit;
+			productName = XcodeFit;
+			productReference = 000000000000000000000120 /* XcodeFit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -79,7 +79,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 000000000000000010000000 /* Build configuration list for PBXProject "XcodeSize" */;
+			buildConfigurationList = 000000000000000010000000 /* Build configuration list for PBXProject "XcodeFit" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -97,7 +97,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				000000000000000100000000 /* XcodeSize */,
+				000000000000000100000000 /* XcodeFit */,
 			);
 		};
 /* End PBXProject section */
@@ -119,7 +119,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		000000000000000011000000 /* Debug configuration for PBXProject "XcodeSize" */ = {
+		000000000000000011000000 /* Debug configuration for PBXProject "XcodeFit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -189,7 +189,7 @@
 			};
 			name = Debug;
 		};
-		000000000000000012000000 /* Release configuration for PBXProject "XcodeSize" */ = {
+		000000000000000012000000 /* Release configuration for PBXProject "XcodeFit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -251,11 +251,11 @@
 			};
 			name = Release;
 		};
-		000000000000000111000000 /* Debug configuration for PBXNativeTarget "XcodeSize" */ = {
+		000000000000000111000000 /* Debug configuration for PBXNativeTarget "XcodeFit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				ENABLE_APP_SANDBOX = NO;
@@ -275,7 +275,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodesize.app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodefit.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
@@ -290,11 +290,11 @@
 			};
 			name = Debug;
 		};
-		000000000000000112000000 /* Release configuration for PBXNativeTarget "XcodeSize" */ = {
+		000000000000000112000000 /* Release configuration for PBXNativeTarget "XcodeFit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				ENABLE_APP_SANDBOX = NO;
@@ -314,7 +314,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodesize.app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodefit.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
@@ -332,19 +332,19 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		000000000000000010000000 /* Build configuration list for PBXProject "XcodeSize" */ = {
+		000000000000000010000000 /* Build configuration list for PBXProject "XcodeFit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000000000000011000000 /* Debug configuration for PBXProject "XcodeSize" */,
-				000000000000000012000000 /* Release configuration for PBXProject "XcodeSize" */,
+				000000000000000011000000 /* Debug configuration for PBXProject "XcodeFit" */,
+				000000000000000012000000 /* Release configuration for PBXProject "XcodeFit" */,
 			);
 			defaultConfigurationName = Release;
 		};
-		000000000000000110000000 /* Build configuration list for PBXNativeTarget "XcodeSize" */ = {
+		000000000000000110000000 /* Build configuration list for PBXNativeTarget "XcodeFit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000000000000111000000 /* Debug configuration for PBXNativeTarget "XcodeSize" */,
-				000000000000000112000000 /* Release configuration for PBXNativeTarget "XcodeSize" */,
+				000000000000000111000000 /* Debug configuration for PBXNativeTarget "XcodeFit" */,
+				000000000000000112000000 /* Release configuration for PBXNativeTarget "XcodeFit" */,
 			);
 			defaultConfigurationName = Release;
 		};

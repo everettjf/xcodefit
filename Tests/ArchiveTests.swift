@@ -1,10 +1,10 @@
 import XCTest
-@testable import XcodeSizeCore
+@testable import XcodeFitCore
 
 final class ArchiveTests: XCTestCase {
     var root: URL!
     override func setUpWithError() throws {
-        root = FileManager.default.temporaryDirectory.appendingPathComponent("XcodeSizeArchiveTests-" + UUID().uuidString).resolvingSymlinksInPath()
+        root = FileManager.default.temporaryDirectory.appendingPathComponent("XcodeFitArchiveTests-" + UUID().uuidString).resolvingSymlinksInPath()
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
     }
     override func tearDownWithError() throws { try FileManager.default.removeItem(at: root) }

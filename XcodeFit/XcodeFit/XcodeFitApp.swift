@@ -1,6 +1,6 @@
 import SwiftUI
 
-@main struct XcodeSizeApp: App {
+@main struct XcodeFitApp: App {
     @State private var model = AppModel()
     var body: some Scene {
         WindowGroup {

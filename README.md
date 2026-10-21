@@ -1,28 +1,43 @@
-# XcodeSize
+# XcodeFit
 
-[Website](https://xnu.app/xcodesize/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodesize-v1.0.0) · [Apache 2.0](LICENSE)
+<img src="web/assets/app-icon.png" width="112" alt="XcodeFit’s friendly claw-hammer mascot">
 
-A native macOS storage browser for understanding and cleaning Xcode's footprint. SwiftUI, AppKit and Foundation; no third-party runtime dependencies. English by default, with Simplified Chinese, Traditional Chinese, Japanese, Korean, and a Follow System option in Settings → Language.
+**A little checkup. A lighter Xcode.**
+
+[Website](https://xnu.app/xcodefit/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.0) · [Apache 2.0](LICENSE)
+
+A friendly native macOS storage checkup for Xcode. See which parts are taking space, understand their purpose, and clean with care. SwiftUI, AppKit and Foundation; no third-party runtime dependencies. English by default, with Simplified Chinese, Traditional Chinese, Japanese, Korean, and a Follow System option in Settings → Language.
 
 ## Install
 
 ```sh
-brew install --cask everettjf/tap/xcodesize
+brew install --cask everettjf/tap/xcodefit
 ```
 
-[Download and release notes](https://github.com/everettjf/homebrew-tap/releases?q=xcodesize&expanded=true). Source code is public under Apache 2.0. Release binaries are distributed through the Homebrew tap.
+[Download and release notes](https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&expanded=true). Source code is public under Apache 2.0. Release binaries are distributed through the Homebrew tap.
 
-Requires macOS 14 or later. The release application supports Apple Silicon and Intel, is signed with Developer ID, and is notarized by Apple. Homebrew updates are available with `brew upgrade --cask xcodesize`.
+Requires macOS 14 or later. The release application supports Apple Silicon and Intel, is signed with Developer ID, and is notarized by Apple. Homebrew updates are available with `brew upgrade --cask xcodefit`. Reinstall when replacing a build with the same 1.0.0 version number.
+
+## Upgrading from XcodeSize
+
+The project, app, and Homebrew cask are now **XcodeFit**. The tap includes a cask rename from `xcodesize` to `xcodefit`. For an existing installation, run:
+
+```sh
+brew update
+brew reinstall --cask everettjf/tap/xcodefit
+```
+
+The new app imports language, cleanup settings, custom scan locations, protection, and cleanup history from the previous preference domain once. Existing XcodeFit preferences are never overwritten. The old domain is kept intact for recovery; ordinary upgrades do not zap preferences. Historical releases retain their original names.
 
 ## Run from source
 
-Open `XcodeSize/XcodeSize.xcodeproj`, select the **XcodeSize** scheme and run on **My Mac**. The deployment target is macOS 14; development and live verification were performed with Xcode 27.1 on macOS 27.
+Open `XcodeFit/XcodeFit.xcodeproj`, select the **XcodeFit** scheme and run on **My Mac**. The deployment target is macOS 14; development and live verification were performed with Xcode 27.1 on macOS 27.
 
 ```sh
-xcodebuild -project XcodeSize/XcodeSize.xcodeproj -scheme XcodeSize \
+xcodebuild -project XcodeFit/XcodeFit.xcodeproj -scheme XcodeFit \
   -configuration Debug -destination 'platform=macOS' \
   -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
-open build/Build/Products/Debug/XcodeSize.app
+open build/Build/Products/Debug/XcodeFit.app
 ```
 
 The app has App Sandbox disabled to inspect developer folders and invoke installed Apple tools. Release builds are Developer ID signed and notarized; the source build command above produces an unsigned development build. No administrator helper is installed.
@@ -49,7 +64,7 @@ The scanner covers:
 
 English is the source and default interface language, including scanning, purpose descriptions, cleanup review, and protection messages. Settings → Language offers English (`en`), 简体中文 (`zh-Hans`), 繁體中文 (`zh-Hant`), 日本語 (`ja`), 한국어 (`ko`), and Follow System. Unsupported system languages fall back to English. Clicking Done applies the choice and starts a fresh scan so cached descriptions use one language consistently. Names, paths, project identities and external tool output are preserved verbatim; history keeps messages from the language used when the operation ran.
 
-Translations live in `XcodeSize/XcodeSize/Core/Resources/Localizable.xcstrings`. The app and Swift package tests compile the same catalog. Retained DeviceSupport versions and project protection roots use structured metadata, never translated display strings.
+Translations live in `XcodeFit/XcodeFit/Core/Resources/Localizable.xcstrings`. The app and Swift package tests compile the same catalog. Retained DeviceSupport versions and project protection roots use structured metadata, never translated display strings.
 
 All five first-release languages cover every catalog entry, including purpose descriptions, cleanup consequences, irreversible-operation acknowledgments, and error messages. Traditional Chinese uses Taiwan-oriented terminology. System matching includes Traditional Chinese preferences such as Taiwan and Hong Kong.
 
@@ -94,23 +109,23 @@ For a read-only live coverage report:
 
 ```sh
 swiftc -O -swift-version 6 -parse-as-library \
-  XcodeSize/XcodeSize/Core/*.swift Tools/ScanAudit.swift -o build/scan-audit
+  XcodeFit/XcodeFit/Core/*.swift Tools/ScanAudit.swift -o build/scan-audit
 build/scan-audit build/scan-report.json
 ```
 
 Debug builds can launch with `--ui-fixture` to generate a separate disposable test tree and isolated preferences for UI inspection. The status bar labels fixture data explicitly. Release builds ignore this argument. Cleanup still rechecks the real tool environment.
 
 ```sh
-open build/Build/Products/Debug/XcodeSize.app --args --ui-fixture
+open build/Build/Products/Debug/XcodeFit.app --args --ui-fixture
 ```
 
 `Tools/GenerateIcon.swift` reproduces the native AppIcon asset catalog.
 
 ## Prepare a release
 
-`scripts/build-release.sh` runs the tests, builds both CPU architectures, signs with Developer ID and hardened runtime, submits to Apple, staples the ticket, and verifies the exact app extracted from the final ZIP. It writes `dist/<version>/XcodeSize-<version>.zip` and `SHA256SUMS`; it does not publish anything.
+`scripts/build-release.sh` runs the tests, builds both CPU architectures, signs with Developer ID and hardened runtime, submits to Apple, staples the ticket, and verifies the exact app extracted from the final ZIP. It writes `dist/<version>/XcodeFit-<version>.zip` and `SHA256SUMS`; it does not publish anything.
 
-Provide a `NOTARY_KEYCHAIN_PROFILE`, or `APPLE_ID`, `APPLE_TEAM_ID`, and `APPLE_SPECIFIC_PASSWORD` in the environment. `SIGNING_IDENTITY` can select a particular Developer ID identity; otherwise the first available Developer ID Application identity is used. Never commit credentials. Release versions come from `MARKETING_VERSION` in the Xcode project. The Homebrew cask is mirrored under `packaging/homebrew/Casks/xcodesize.rb`.
+Provide a `NOTARY_KEYCHAIN_PROFILE`, or `APPLE_ID`, `APPLE_TEAM_ID`, and `APPLE_SPECIFIC_PASSWORD` in the environment. `SIGNING_IDENTITY` can select a particular Developer ID identity; otherwise the first available Developer ID Application identity is used. Never commit credentials. Release versions come from `MARKETING_VERSION` in the Xcode project. The Homebrew cask is mirrored under `packaging/homebrew/Casks/xcodefit.rb`.
 
 ## Website
 
@@ -126,4 +141,4 @@ The interactive product preview uses illustrative data; it never scans a visitor
 
 ## License
 
-Copyright 2026 XcodeSize contributors. Licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) for attribution.
+Copyright 2026 XcodeFit contributors. Licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) for attribution.

@@ -1,68 +1,35 @@
 // SPDX-License-Identifier: Apache-2.0
 'use strict';
-const tabs = [...document.querySelectorAll('[role="tab"]')];
-function selectTab(tab) {
-  tabs.forEach(item => {
-    const selected = item === tab;
-    item.setAttribute('aria-selected', String(selected));
-    item.tabIndex = selected ? 0 : -1;
-    document.getElementById(item.getAttribute('aria-controls')).hidden = !selected;
-  });
-  document.querySelectorAll('[data-side]').forEach(item => item.classList.toggle('selected', tab.id === `tab-${item.dataset.side}`));
-}
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectTab(tab));
-  tab.addEventListener('keydown', event => {
-    let next;
-    if (event.key === 'ArrowRight') next = tabs[(index + 1) % tabs.length];
-    if (event.key === 'ArrowLeft') next = tabs[(index + tabs.length - 1) % tabs.length];
-    if (event.key === 'Home') next = tabs[0];
-    if (event.key === 'End') next = tabs[tabs.length - 1];
-    if (!next) return;
-    event.preventDefault();
-    selectTab(next);
-    next.focus();
-  });
-});
-const examples = {
-  standard: {
-    title: 'Clear the rebuildable clutter.',
-    description: 'Clean compiler caches, old logs, and idle builds. Archives, release symbols, and source working copies stay out of Standard Clean.',
-    folder: 'ModuleCache.noindex', path: '~/Library/Developer/Xcode/DerivedData/', method: 'Move to Trash',
-    note: 'Protect a project’s location to keep it out of cleanup.'
-  },
-  deep: {
-    title: 'Choose what you no longer need.',
-    description: 'Keep the latest 1, 3, or 5 archive versions, including every build, or select all unprotected archives. Review the release-symbol impact before cleanup.',
-    folder: 'MyApp.xcarchive', path: '~/Library/Developer/Xcode/Archives/', method: 'Move to Trash',
-    note: 'Older releases need their own matching dSYMs. Protected locations always stay; additional confirmation is required.'
-  }
+const areas = {
+  builds: {name:'Build products & indexes', icon:'▣', color:'blue', tag:'REBUILDABLE · INSPECT FIRST', path:'~/Library/Developer/Xcode/DerivedData/', description:'The apps, intermediate files, and source indexes your projects leave behind. Idle data can make room for the next build; rebuilding and indexing take time.', care:'Build folders containing dSYMs stay out of Standard Clean. Those symbols may be needed for a particular released build.'},
+  caches: {name:'Compiler caches', icon:'≋', color:'mint', tag:'REGENERABLE · A GENTLE START', path:'~/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/', description:'Reusable compilation results and modules help Xcode work faster. Cleaning them makes room, but the next build may take longer as Xcode regenerates what it needs.', care:'Standard Clean includes identified compiler caches. Files are rechecked before they move to Trash; protected locations are excluded.'},
+  simulators: {name:'Simulator devices', icon:'▯', color:'peach', tag:'LOCAL TEST STATE · EXPLICIT CHOICE', path:'~/Library/Developer/CoreSimulator/Devices/', description:'Your virtual devices carry apps, sandboxes, databases, and settings. Their size includes local test state, not just disposable operating-system files.', care:'Deep Clean offers supported simulator removal through Apple’s simctl. This permanently discards local test data and needs an extra acknowledgment.'},
+  archives: {name:'Release archives & dSYMs', icon:'▤', color:'violet', tag:'RELEASE HISTORY · KEEP WITH CARE', path:'~/Library/Developer/Xcode/Archives/', description:'Each distributed build needs its own matching symbols for crash analysis. XcodeFit shows product and symbol sizes, checks UUID matches, and groups archives by app, platform, and signing team.', care:'Keep the latest 1, 3, or 5 versions with every build, or explicitly select all unprotected archives. Unknown versions stay under retention rules. A newer dSYM cannot replace an older one.'}
 };
-document.querySelectorAll('[data-tier]').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('[data-tier]').forEach(item => {
-      item.classList.toggle('active', item === button);
-      item.setAttribute('aria-pressed', String(item === button));
-    });
-    const value = examples[button.dataset.tier];
-    Object.entries(value).forEach(([key, text]) => { document.getElementById(`tier-${key}`).textContent = text; });
-  });
+const tabs = [...document.querySelectorAll('[data-report-part]')];
+function selectArea(key, moveFocus=false) {
+  const area=areas[key]; if(!area)return;
+  document.querySelectorAll('[data-part]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.part===key)));
+  tabs.forEach(tab=>{const selected=tab.dataset.reportPart===key;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;if(selected&&moveFocus)tab.focus();});
+  ['name','tag','path','description','care'].forEach(field=>{document.getElementById(`detail-${field}`).textContent=area[field];});
+  const icon=document.getElementById('detail-icon');icon.className=`part-symbol ${area.color}`;icon.textContent=area.icon;
+  document.getElementById('part-detail').setAttribute('aria-labelledby',`tab-${key}`);
+}
+document.querySelectorAll('[data-part]').forEach(button=>button.addEventListener('click',()=>selectArea(button.dataset.part)));
+tabs.forEach((tab,index)=>{
+ tab.addEventListener('click',()=>selectArea(tab.dataset.reportPart));
+ tab.addEventListener('keydown',event=>{let next;if(event.key==='ArrowRight')next=(index+1)%tabs.length;if(event.key==='ArrowLeft')next=(index+tabs.length-1)%tabs.length;if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;if(next!==undefined){event.preventDefault();selectArea(tabs[next].dataset.reportPart,true);}});
 });
-const copyButton = document.getElementById('copy-command');
-const status = document.getElementById('copy-status');
-copyButton.addEventListener('click', async () => {
-  const command = document.getElementById('install-command');
-  try {
-    await navigator.clipboard.writeText(command.textContent);
-    status.textContent = 'Copied. Paste into Terminal to install.';
-    copyButton.setAttribute('aria-label', 'Homebrew command copied');
-    copyButton.querySelector('use').setAttribute('href', '#check');
-  } catch {
-    const range = document.createRange();
-    range.selectNodeContents(command);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    status.textContent = 'Command selected. Press ⌘C (or Ctrl+C) to copy.';
-  }
+let checkupRunning=false;
+document.getElementById('start-checkup').addEventListener('click',()=>{
+ if(checkupRunning)return;checkupRunning=true;
+ const scene=document.querySelector('.checkup-scene');const status=document.getElementById('scan-status');const trigger=document.getElementById('start-checkup');
+ scene.classList.add('is-scanning');trigger.disabled=true;status.textContent='Checking the example storage areas…';
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ setTimeout(()=>{scene.classList.remove('is-scanning');checkupRunning=false;trigger.disabled=false;selectArea('builds');status.textContent='Example checkup ready. Your real files stay untouched.';document.getElementById('checkup').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});document.getElementById('part-detail').focus({preventScroll:true});},reduce?100:2700);
+});
+document.getElementById('copy-command').addEventListener('click',async()=>{
+ const status=document.getElementById('copy-status');
+ try{await navigator.clipboard.writeText(document.getElementById('install-command').textContent);status.textContent='Copied. Paste into Terminal to install XcodeFit.';}
+ catch{status.textContent='Select and copy the command above.';}
 });

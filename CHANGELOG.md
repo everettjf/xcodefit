@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0 — build 3 (XcodeFit)
+
+- Rename the app, repository, Xcode project, source paths, bundle ID, Swift package and Homebrew cask to XcodeFit.
+- Import legacy language, cleanup settings, protected paths, scan locations and history once, without overwriting current preferences.
+- Introduce a friendly chubby claw-hammer icon and a fully redesigned storage checkup website with interactive anatomy, local example report, reduced-motion support and automatic light/dark appearance.
+- Add Homebrew token migration from xcodesize to xcodefit. Historical builds retain their original identities.
+
+
 ## 1.0.0 — build 2 (re-release)
 
 - Replace three cleanup tiers with Standard (default) and Deep.

@@ -10,7 +10,7 @@ enum AppLanguage: String, CaseIterable, Sendable, Identifiable {
     case system
     static var supportedIdentifiers: [String] { allCases.filter { $0 != .system }.map(\.rawValue) }
     var id: String { rawValue }
-    static let preferenceKey = "XcodeSize.interfaceLanguage"
+    static let preferenceKey = "XcodeFit.interfaceLanguage"
     static var current: AppLanguage {
         fromPreference(L10n.preferences.string(forKey: preferenceKey))
     }
@@ -37,8 +37,9 @@ enum AppLanguage: String, CaseIterable, Sendable, Identifiable {
 enum L10n {
     static var preferences: UserDefaults {
         #if DEBUG
-        if ProcessInfo.processInfo.arguments.contains("--ui-fixture"), let preferences = UserDefaults(suiteName: "XcodeSize.UIFixture") { return preferences }
+        if ProcessInfo.processInfo.arguments.contains("--ui-fixture"), let preferences = UserDefaults(suiteName: "XcodeFit.UIFixture") { return preferences }
         #endif
+        BrandMigration.prepareStandardPreferences()
         return .standard
     }
     #if SWIFT_PACKAGE

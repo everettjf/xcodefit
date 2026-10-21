@@ -2,12 +2,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "XcodeSizeCore",
+    name: "XcodeFitCore",
     defaultLocalization: "en",
     platforms: [.macOS(.v14)],
-    products: [.library(name: "XcodeSizeCore", targets: ["XcodeSizeCore"])],
+    products: [.library(name: "XcodeFitCore", targets: ["XcodeFitCore"])],
     targets: [
-        .target(name: "XcodeSizeCore", path: "XcodeSize/XcodeSize/Core", resources: [.process("Resources")]),
-        .testTarget(name: "XcodeSizeCoreTests", dependencies: ["XcodeSizeCore"], path: "Tests")
+        .target(name: "XcodeFitCore", path: "XcodeFit/XcodeFit/Core", resources: [.process("Resources")]),
+        .testTarget(name: "XcodeFitCoreTests", dependencies: ["XcodeFitCore"], path: "Tests")
     ]
 )

@@ -3,19 +3,19 @@
   <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
     <BuildActionEntries>
       <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
-        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="000000000000000100000000" BuildableName="XcodeSize.app" BlueprintName="XcodeSize" ReferencedContainer="container:XcodeSize.xcodeproj"/>
+        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="000000000000000100000000" BuildableName="XcodeFit.app" BlueprintName="XcodeFit" ReferencedContainer="container:XcodeFit.xcodeproj"/>
       </BuildActionEntry>
     </BuildActionEntries>
   </BuildAction>
   <TestAction buildConfiguration="Debug" shouldUseLaunchSchemeArgsEnv="YES"/>
   <LaunchAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.IDEFoundation.Launcher.LLDB" launchStyle="0" useCustomWorkingDirectory="NO" ignoresPersistentStateOnLaunch="NO" debugDocumentVersioning="YES" allowLocationSimulation="YES">
     <BuildableProductRunnable runnableDebuggingMode="0">
-      <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="000000000000000100000000" BuildableName="XcodeSize.app" BlueprintName="XcodeSize" ReferencedContainer="container:XcodeSize.xcodeproj"/>
+      <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="000000000000000100000000" BuildableName="XcodeFit.app" BlueprintName="XcodeFit" ReferencedContainer="container:XcodeFit.xcodeproj"/>
     </BuildableProductRunnable>
   </LaunchAction>
   <ProfileAction buildConfiguration="Release" shouldUseLaunchSchemeArgsEnv="YES" savedToolIdentifier="" useCustomWorkingDirectory="NO" debugDocumentVersioning="YES">
     <BuildableProductRunnable runnableDebuggingMode="0">
-      <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="000000000000000100000000" BuildableName="XcodeSize.app" BlueprintName="XcodeSize" ReferencedContainer="container:XcodeSize.xcodeproj"/>
+      <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="000000000000000100000000" BuildableName="XcodeFit.app" BlueprintName="XcodeFit" ReferencedContainer="container:XcodeFit.xcodeproj"/>
     </BuildableProductRunnable>
   </ProfileAction>
   <AnalyzeAction buildConfiguration="Debug"/>

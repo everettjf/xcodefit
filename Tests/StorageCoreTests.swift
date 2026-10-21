@@ -1,11 +1,11 @@
 import XCTest
 import Darwin
-@testable import XcodeSizeCore
+@testable import XcodeFitCore
 
 final class StorageCoreTests: XCTestCase {
     var root: URL!
     override func setUpWithError() throws {
-        root = FileManager.default.temporaryDirectory.appendingPathComponent("XcodeSizeTests-" + UUID().uuidString).resolvingSymlinksInPath()
+        root = FileManager.default.temporaryDirectory.appendingPathComponent("XcodeFitTests-" + UUID().uuidString).resolvingSymlinksInPath()
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
     }
     override func tearDownWithError() throws { try FileManager.default.removeItem(at: root) }
