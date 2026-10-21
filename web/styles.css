@@ -38,3 +38,5 @@ h1,h2{font-weight:800;letter-spacing:-.055em}.hero h1{line-height:1.15}.hero h1 
 .architecture-note{max-width:470px;margin:20px auto 0!important;font-size:10px!important;line-height:1.7;color:var(--muted)}
 
 .requirements a{text-decoration:underline;text-underline-offset:3px}.requirements a:hover{color:var(--accent)}
+
+.scan-preview{margin-top:28px}

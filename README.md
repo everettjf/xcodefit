@@ -58,6 +58,18 @@ Already using XcodeSize? Follow the [migration guide](docs/UPGRADING.md) to carr
 - **Check release symbols.** See product and dSYM sizes, and check binary/symbol UUID matches without assuming that a backup exists.
 - **Feel at home on macOS.** Native system surfaces follow light/dark appearance, with bamboo-green accents. English, 简体中文, 繁體中文, 日本語, and 한국어 are included.
 
+## Follow the scan
+
+A visible banner shows the current item and discovered item count on every page. Stop the scan at any time; partial results are labeled. The scan does not display a percentage because its total scope is not known in advance.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="web/assets/screenshots/scanning-dark.jpg">
+  <source media="(prefers-color-scheme: light)" srcset="web/assets/screenshots/scanning-light.jpg">
+  <img src="web/assets/screenshots/scanning-light.jpg" alt="XcodeFit scanning test folders with the scan status banner, item count, and Stop Scan button" width="1100" loading="lazy">
+</picture>
+
+<sub>Real Debug capture with isolated test folders and scan events slowed for capture. Item counts are not a percentage or a speed measurement.</sub>
+
 ## Two cleanup modes
 
 | | Standard Clean · default | Deep Clean |

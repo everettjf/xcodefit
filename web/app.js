@@ -36,17 +36,17 @@ document.getElementById('copy-command').addEventListener('click',async()=>{
 
 // Picture media queries switch instantly with the OS; buttons only preview the screenshot.
 const appThemeButtons = [...document.querySelectorAll('[data-app-theme]')];
-const appDarkSource = document.getElementById('app-overview-dark');
-const appImageLink = document.getElementById('app-screenshot-link');
+const appDarkSources = [...document.querySelectorAll('.app-preview picture source')];
+const appImageLinks = [...document.querySelectorAll('[data-screenshot]')];
 const systemAppearance = window.matchMedia('(prefers-color-scheme: dark)');
 let appPreviewMode = 'auto';
 function updateAppPreviewLink() {
  const dark = appPreviewMode === 'dark' || (appPreviewMode === 'auto' && systemAppearance.matches);
- appImageLink.href = `assets/screenshots/overview-${dark ? 'dark' : 'light'}.jpg`;
+ appImageLinks.forEach(link => { link.href = `assets/screenshots/${link.dataset.screenshot}-${dark ? 'dark' : 'light'}.jpg`; });
 }
 appThemeButtons.forEach(button => button.addEventListener('click', () => {
  appPreviewMode = button.dataset.appTheme;
- appDarkSource.media = appPreviewMode === 'auto' ? '(prefers-color-scheme: dark)' : appPreviewMode === 'dark' ? 'all' : 'not all';
+ appDarkSources.forEach(source => { source.media = appPreviewMode === 'auto' ? '(prefers-color-scheme: dark)' : appPreviewMode === 'dark' ? 'all' : 'not all'; });
  appThemeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
  document.getElementById('preview-appearance').textContent = appPreviewMode === 'auto' ? 'Follows your system appearance' : appPreviewMode === 'dark' ? 'Previewing dark appearance' : 'Previewing light appearance';
  updateAppPreviewLink();
