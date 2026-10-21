@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — build 5
+
+- Refresh the website with bamboo greens, soft ivory surfaces, and a coordinated forest-green dark appearance.
+- Align website navigation, demo labels, and sharing copy with the XcodeFit name.
+- Publish a new signed and notarized universal build for normal Homebrew upgrades. The app retains its colorful interface, five languages, and Standard/Deep cleanup behavior.
+
 ## 1.0.0 — build 4 (colorful checkup)
 
 - Refresh the website with candy-colored stickers, playful rounded type, mint mascot backdrop, hearts/stars, and brighter light/dark palettes.
