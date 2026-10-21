@@ -2,7 +2,7 @@
 
 <img src="web/assets/app-icon.png" width="112" alt="XcodeFit’s friendly claw-hammer mascot">
 
-**A little checkup. A lighter Xcode.**
+**A little fitter. A lighter Xcode.**
 
 [Website](https://xnu.app/xcodefit/) · [Download](https://github.com/everettjf/homebrew-tap/releases/tag/xcodefit-v1.0.0) · [Apache 2.0](LICENSE)
 
