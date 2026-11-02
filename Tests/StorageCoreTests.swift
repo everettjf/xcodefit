@@ -69,13 +69,13 @@ final class StorageCoreTests: XCTestCase {
         build.minimumTier = .regular
         let settings = CleanupSettings()
         XCTAssertEqual(CleanupTier.allCases, [.regular, .deep])
-        XCTAssertTrue(CleanupPolicy.recommended(build, tier: .regular, settings: settings, protectedPaths: [], environment: idle))
+        XCTAssertTrue(CleanupPolicy.recommended(build, tier: .regular, settings: settings, protectedPaths: []))
         build.date = Date()
-        XCTAssertFalse(CleanupPolicy.recommended(build, tier: .regular, settings: settings, protectedPaths: [], environment: idle))
-        XCTAssertTrue(CleanupPolicy.recommended(build, tier: .deep, settings: settings, protectedPaths: [], environment: idle))
+        XCTAssertFalse(CleanupPolicy.recommended(build, tier: .regular, settings: settings, protectedPaths: []))
+        XCTAssertTrue(CleanupPolicy.recommended(build, tier: .deep, settings: settings, protectedPaths: []))
         var archive = item(try file("archive"), category: .archives)
         archive.minimumTier = .deep; archive.manualOnly = true
-        XCTAssertFalse(CleanupPolicy.recommended(archive, tier: .deep, settings: settings, protectedPaths: [], environment: idle))
+        XCTAssertFalse(CleanupPolicy.recommended(archive, tier: .deep, settings: settings, protectedPaths: []))
     }
     func testProtectedAncestorAndDescendantBothBlock() throws {
         let value = item(try file("project/cache"))
@@ -100,6 +100,22 @@ final class StorageCoreTests: XCTestCase {
         var busy = idle; busy.runningTools = ["xcodebuild"]
         XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: busy))
         XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: ToolEnvironment()))
+    }
+    func testPlanningWhileToolsRunStillPreservesExecutionGuards() throws {
+        let value = item(try file("cache"))
+        var busy = idle; busy.runningTools = ["Xcode"]
+        XCTAssertNil(CleanupPolicy.selectionBlockReason(value, tier: .regular, protectedPaths: []))
+        XCTAssertTrue(CleanupPolicy.recommended(value, tier: .regular, settings: CleanupSettings(), protectedPaths: []))
+        XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: busy))
+
+        let state = busy
+        let engine = CleanupEngine(inspect: { state }, trash: { _ in XCTFail("Busy tools must prevent deletion"); return nil })
+        let result = engine.execute(CleanupPlan(tier: .regular, items: [value]), protectedPaths: [])
+        XCTAssertEqual(result.first?.outcome, .skipped)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: value.url.path))
+
+        XCTAssertNotNil(CleanupPolicy.selectionBlockReason(value, tier: .regular, protectedPaths: [value.id]))
+        XCTAssertNotNil(CleanupPolicy.selectionBlockReason(item(try file("read-only"), action: .readOnly), tier: .deep, protectedPaths: []))
     }
     func testCleanupRejectsSymlinkSwapAndContainerRoots() throws {
         let value = item(try file("cache"))
@@ -180,9 +196,9 @@ final class StorageCoreTests: XCTestCase {
     func testRetainedDeviceSupportIsNeverRecommended() throws {
         var support = item(try file("support"), category: .deviceSupport)
         support.minimumTier = .regular; support.subtitle = "An arbitrary translated label"; support.retainedDeviceSupport = true
-        XCTAssertFalse(CleanupPolicy.recommended(support, tier: .deep, settings: CleanupSettings(), protectedPaths: [], environment: idle))
+        XCTAssertFalse(CleanupPolicy.recommended(support, tier: .deep, settings: CleanupSettings(), protectedPaths: []))
         support.retainedDeviceSupport = false
-        XCTAssertTrue(CleanupPolicy.recommended(support, tier: .regular, settings: CleanupSettings(), protectedPaths: [], environment: idle))
+        XCTAssertTrue(CleanupPolicy.recommended(support, tier: .regular, settings: CleanupSettings(), protectedPaths: []))
     }
 
     func testCancelledScanCannotYieldCompleteMeasurements() async throws {

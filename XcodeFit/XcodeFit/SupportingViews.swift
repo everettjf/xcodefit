@@ -43,12 +43,21 @@ struct CleanupReviewView: View {
                 if plan.hasPermanentActions {
                     Toggle(L10n.text("I understand that simctl permanently removes the selected devices or runtimes. These actions cannot be undone."), isOn: $acknowledgePermanent).font(.system(size: 12))
                 }
+                if !model.environment.processStateKnown || model.environment.toolsBusy || model.refreshingTools {
+                    HStack {
+                        Label(model.environment.toolsBusy ? L10n.text("Development tools detected: %@. Close them, then refresh to enable cleanup.", String(describing: model.environment.runningTools.joined(separator: ", "))) : L10n.text("Development-tool status is unknown. Cleanup is paused."), systemImage: "pause.circle")
+                            .font(.system(size: 11)).foregroundStyle(.orange)
+                        Spacer(minLength: 0)
+                        Button(model.refreshingTools ? L10n.text("Refreshing…") : L10n.text("Refresh Status")) { model.refreshToolState() }
+                            .controlSize(.small).disabled(model.refreshingTools || model.isScanning || model.isCleaning)
+                    }
+                }
             }
             HStack {
                 Text(L10n.text("Xcode and simulators will not be forcibly closed.")).font(.system(size: 10)).foregroundStyle(.secondary)
                 Spacer()
                 Button(L10n.text("Cancel"), role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction)
-                Button(L10n.text("Clean Selection (%@)", String(describing: (plan.items.count))), role: .destructive) { model.executePlan(plan) }.buttonStyle(.borderedProminent).tint(.red).disabled(!allowed || !model.canClean)
+                Button(L10n.text("Clean Selection (%@)", String(describing: (plan.items.count))), role: .destructive) { model.executePlan(plan) }.buttonStyle(.borderedProminent).tint(.red).disabled(!allowed || !model.canExecuteCleanup)
             }
         }.padding(27).frame(width: 650)
     }

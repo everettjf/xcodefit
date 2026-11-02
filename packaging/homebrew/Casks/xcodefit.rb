@@ -1,9 +1,9 @@
 cask "xcodefit" do
   arch arm: "-arm64", intel: ""
 
-  version "1.0.7"
-  sha256 arm: "b68752416246f90fc4ae85fabfa9a7fda31dd8627177272af2719b25f9475a2a",
-         intel: "de4f6d30dbf52d09443165cc0e080c4aee26136d3b99991b56e784f71c4779ba"
+  version "1.0.8"
+  sha256 arm: "93175e0a69fa8c94c38baf192efacbfbf2fafcce2ec6c7464621e389981533ba",
+         intel: "21ef163c13c1616016a55e930db1a03232d53f9dae59d5528852d197fead001c"
 
   url "https://github.com/everettjf/homebrew-tap/releases/download/xcodefit-v#{version}/XcodeFit-#{version}#{arch}.zip"
   name "XcodeFit"

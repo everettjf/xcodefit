@@ -169,13 +169,18 @@ struct CleanupSettings: Codable, Sendable {
 }
 
 enum CleanupPolicy {
-    static func blockReason(_ item: StorageItem, tier: CleanupTier, protectedPaths: Set<String>, environment: ToolEnvironment) -> String? {
+    /// Selection is a plan. Runtime state is checked when the plan is executed.
+    static func selectionBlockReason(_ item: StorageItem, tier: CleanupTier, protectedPaths: Set<String>) -> String? {
         if let reason = item.blockedReason { return reason }
         if !item.complete { return L10n.text("The scan is incomplete; not all files can be verified.") }
         if item.action == .readOnly { return L10n.text("This item is read-only.") }
         if tier == .regular && item.requiresDeepCleanup { return L10n.text("Switch to %@", CleanupTier.deep.title) }
         if tier.rawValue < item.minimumTier.rawValue { return L10n.text("Switch to %@", String(describing: (item.minimumTier.title))) }
         if protectedPaths.contains(where: { PathRules.contains($0, item.url.path) || PathRules.contains(item.url.path, $0) }) { return L10n.text("This location is protected.") }
+        return nil
+    }
+    static func blockReason(_ item: StorageItem, tier: CleanupTier, protectedPaths: Set<String>, environment: ToolEnvironment) -> String? {
+        if let reason = selectionBlockReason(item, tier: tier, protectedPaths: protectedPaths) { return reason }
         if environment.toolsBusy { return L10n.text("Xcode or development tools are running.") }
         if !environment.processStateKnown { return L10n.text("Development-tool status cannot be verified.") }
         if case .simulator(let id) = item.action {
@@ -188,8 +193,8 @@ enum CleanupPolicy {
         }
         return nil
     }
-    static func recommended(_ item: StorageItem, tier: CleanupTier, settings: CleanupSettings, protectedPaths: Set<String>, environment: ToolEnvironment, now: Date = Date()) -> Bool {
-        guard blockReason(item, tier: tier, protectedPaths: protectedPaths, environment: environment) == nil, !item.manualOnly, !item.requiresDeepCleanup else { return false }
+    static func recommended(_ item: StorageItem, tier: CleanupTier, settings: CleanupSettings, protectedPaths: Set<String>, now: Date = Date()) -> Bool {
+        guard selectionBlockReason(item, tier: tier, protectedPaths: protectedPaths) == nil, !item.manualOnly, !item.requiresDeepCleanup else { return false }
         let age = now.timeIntervalSince(item.date ?? now) / 86400
         switch item.category {
         case .caches: return true

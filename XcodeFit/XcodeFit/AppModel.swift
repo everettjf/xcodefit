@@ -94,6 +94,7 @@ final class AppModel {
     var environment: ToolEnvironment { snapshot?.environment ?? ToolEnvironment() }
     var hasIncompleteScan: Bool { snapshot?.cancelled == true || snapshot?.notices.contains(where: \.isError) == true }
     var canClean: Bool { !isScanning && !isCleaning && snapshot != nil && snapshot?.cancelled == false }
+    var canExecuteCleanup: Bool { canClean && !refreshingTools && environment.processStateKnown && !environment.toolsBusy }
     var selectedItems: [StorageItem] { items.filter { selected.contains($0.id) } }
     var selectedBytes: Int64 { selectedItems.reduce(0) { $0 + $1.size } }
     var visibleItems: [StorageItem] {
@@ -164,7 +165,7 @@ final class AppModel {
         Task {
             let environment = await Task.detached(priority: .utility) { ToolEnvironment.inspect() }.value
             snapshot?.environment = environment
-            selected = []; refreshingTools = false
+            refreshingTools = false
         }
     }
     func isProtected(_ item: StorageItem) -> Bool { protectedPaths.contains { PathRules.contains($0, item.id) || PathRules.contains(item.id, $0) } }
@@ -179,21 +180,25 @@ final class AppModel {
         if !canClean { return isScanning ? L10n.text("Waiting for the scan to finish") : L10n.text("Finish a complete scan before cleaning") }
         return CleanupPolicy.blockReason(item, tier: tier, protectedPaths: protectedPaths, environment: environment)
     }
+    func selectionBlockReason(_ item: StorageItem) -> String? {
+        if !canClean { return isScanning ? L10n.text("Waiting for the scan to finish") : L10n.text("Finish a complete scan before cleaning") }
+        return CleanupPolicy.selectionBlockReason(item, tier: tier, protectedPaths: protectedPaths)
+    }
     func recommended(_ item: StorageItem) -> Bool {
-        canClean && CleanupPolicy.recommended(item, tier: tier, settings: settings, protectedPaths: protectedPaths, environment: environment)
+        canClean && CleanupPolicy.recommended(item, tier: tier, settings: settings, protectedPaths: protectedPaths)
     }
     func applyRecommendations() { selected = Set(items.filter { recommended($0) }.map(\.id)) }
     func changeTier(_ value: CleanupTier) { tier = value; selected = [] }
     func toggleSelection(_ item: StorageItem) {
         if selected.contains(item.id) { selected.remove(item.id) }
-        else if blockReason(item) == nil { selected.insert(item.id) }
+        else if selectionBlockReason(item) == nil { selected.insert(item.id) }
     }
     func review() {
-        let valid = selectedItems.filter { blockReason($0) == nil }
+        let valid = selectedItems.filter { selectionBlockReason($0) == nil }
         if !valid.isEmpty { plan = CleanupPlan(tier: tier, items: valid.sorted { $0.id < $1.id }) }
     }
     func executePlan(_ plan: CleanupPlan) {
-        guard canClean else { return }
+        guard canExecuteCleanup else { return }
         self.plan = nil; isCleaning = true; progress = L10n.text("Rechecking files and development tools…"); capacityBeforeCleanup = availableBytes; capacityChange = nil
         let protected = protectedPaths
         let task = Task.detached(priority: .utility) { [model = self] in

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.8 — build 12
+
+- Make the entire Standard Clean and Deep Clean cards clickable.
+- Allow selection and review while Xcode or another development tool is running. Keep the final cleanup action blocked until tools stop and their status is refreshed; preserve the selection during refresh.
+- Add regression coverage for planning with active tools, retain the execution safety checks, and verify the updated controls in the native app.
+
 ## 1.0.7 — build 11
 
 - Show a prominent scanning banner on every page, including an activity indicator, current scan item, discovered-item count, and Stop Scan button. Hide it after completion or cancellation; retain the partial-results notice when canceled.

@@ -290,7 +290,7 @@ struct StorageListView: View {
                     TableColumn("") { item in
                         if isCleanup {
                             Toggle(L10n.text("Select %@", String(describing: (item.name))), isOn: Binding(get: { model.selected.contains(item.id) }, set: { _ in model.toggleSelection(item) }))
-                                .toggleStyle(.checkbox).labelsHidden().disabled(model.blockReason(item) != nil).help(model.blockReason(item) ?? L10n.text("Add to the cleanup selection"))
+                                .toggleStyle(.checkbox).labelsHidden().disabled(model.selectionBlockReason(item) != nil).help(model.selectionBlockReason(item) ?? L10n.text("Add to the cleanup selection"))
                         } else { Image(systemName: item.category.symbol).foregroundStyle(item.category.tint) }
                     }.width(22)
                     TableColumn(L10n.text("Name / Owner")) { item in
@@ -318,7 +318,7 @@ struct StorageListView: View {
                     }.width(105)
                     TableColumn(L10n.text("Status")) { item in
                         Text(status(item)).font(.system(size: 10)).foregroundStyle(item.blockedReason != nil || model.isProtected(item) ? Color.secondary : item.manualOnly ? Color.orange : Color.secondary)
-                            .lineLimit(1).help(model.blockReason(item) ?? item.action.title)
+                            .lineLimit(1).help(model.selectionBlockReason(item) ?? item.action.title)
                     }.width(85)
                 }
                 .alternatingRowBackgrounds(.disabled)
@@ -373,6 +373,7 @@ struct CleanupTierPicker: View {
                         Text(tier.subtitle).font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(2)
                     }
                     .padding(12).frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(RoundedRectangle(cornerRadius: 16))
                     .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(model.tier == tier ? FitPalette.accent : FitPalette.border, lineWidth: model.tier == tier ? 2 : 1))
                 }.buttonStyle(.plain).disabled(model.isCleaning)
             }

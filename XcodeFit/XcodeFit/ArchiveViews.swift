@@ -7,7 +7,7 @@ struct ArchiveRetentionView: View {
     private var archives: [StorageItem] { model.items.filter { $0.url.pathExtension == "xcarchive" && $0.category == .archives } }
     private var candidates: Set<String> {
         ArchiveRetention.candidates(archives, keeping: keep, protectedPaths: model.protectedPaths)
-            .intersection(Set(archives.filter { model.blockReason($0) == nil }.map(\.id)))
+            .intersection(Set(archives.filter { model.selectionBlockReason($0) == nil }.map(\.id)))
     }
     private var groups: [(key: String, values: [StorageItem])] {
         Dictionary(grouping: archives, by: { $0.archive?.groupKey ?? $0.id }).map { (key: $0.key, values: $0.value.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }) }.sorted { $0.key < $1.key }

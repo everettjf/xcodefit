@@ -39,6 +39,8 @@ swift test
 
 Core tests use disposable temporary fixtures. They cover hardlinks, symlinks, resource forks versus `du`, tier behavior, project classification and protection, custom paths, cancellation, file replacement, unknown/active tools, simulator command construction/failure, and the real macOS Trash API followed by restoration of the test fixture. Real simulator/runtime removal is intentionally not performed by tests.
 
+Cleanup selection and review remain available while Xcode or another development tool is running. The review sheet explains the blocker and can refresh tool status without discarding the selection. Its final cleanup button stays disabled until the tools stop and their status is refreshed. The cleanup engine checks tool state and file identity again immediately before each operation. Protected, incomplete, and read-only items remain unselectable.
+
 For a read-only live coverage report:
 
 ```sh

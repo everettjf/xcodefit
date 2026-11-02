@@ -76,5 +76,23 @@ private struct MeasuredHistory: View {
         }
         }
         print("\(checks) native layout checks passed")
+
+        let fixture = FileManager.default.temporaryDirectory.appendingPathComponent("XcodeFitPlanningCheck-" + UUID().uuidString)
+        try! Data(repeating: 1, count: 1024).write(to: fixture)
+        defer { try? FileManager.default.removeItem(at: fixture) }
+        let item = StorageItem(url: fixture, name: "Disposable cache", category: .caches, purpose: "Fixture", owner: "Fixture", evidence: "Fixture", measurement: FileSizer.measure(fixture), action: .trash, minimumTier: .regular, sourceRoot: fixture.deletingLastPathComponent())
+        var environment = ToolEnvironment(processStateKnown: true, simulatorStateKnown: true)
+        environment.runningTools = ["Xcode"]
+        model.snapshot = ScanSnapshot(items: [item], environment: environment)
+        model.items = [item]
+        model.isScanning = false
+        model.destination = .cleanup
+        precondition(model.selectionBlockReason(item) == nil, "Busy tools must not block planning")
+        model.toggleSelection(item)
+        precondition(model.selected.contains(item.id), "Checkbox must select while Xcode runs")
+        model.review()
+        precondition(model.plan?.items.map(\.id) == [item.id], "Review must open while Xcode runs")
+        precondition(!model.canExecuteCleanup, "Execution must remain blocked while Xcode runs")
+        print("PASS selection and review while Xcode runs; execution blocked")
     }
 }

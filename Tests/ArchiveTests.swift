@@ -53,7 +53,7 @@ final class ArchiveTests: XCTestCase {
         var value = try archive("release", version: "1")
         value.minimumTier = .regular; value.manualOnly = false
         XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: idle))
-        XCTAssertFalse(CleanupPolicy.recommended(value, tier: .deep, settings: CleanupSettings(), protectedPaths: [], environment: idle))
+        XCTAssertFalse(CleanupPolicy.recommended(value, tier: .deep, settings: CleanupSettings(), protectedPaths: []))
         let environment = idle
         let engine = CleanupEngine(inspect: { environment }, trash: { _ in XCTFail("Standard must preserve archives"); return nil })
         XCTAssertEqual(engine.execute(CleanupPlan(tier: .regular, items: [value]), protectedPaths: []).first?.outcome, .skipped)
@@ -67,7 +67,7 @@ final class ArchiveTests: XCTestCase {
             XCTAssertTrue(value.requiresDeepCleanup)
             XCTAssertEqual(value.minimumTier, .deep)
             XCTAssertNotNil(CleanupPolicy.blockReason(value, tier: .regular, protectedPaths: [], environment: idle))
-            XCTAssertFalse(CleanupPolicy.recommended(value, tier: .deep, settings: CleanupSettings(), protectedPaths: [], environment: idle))
+            XCTAssertFalse(CleanupPolicy.recommended(value, tier: .deep, settings: CleanupSettings(), protectedPaths: []))
         }
         XCTAssertEqual(snapshot.items.filter { $0.requiresDeepCleanup }.count, 2)
     }
