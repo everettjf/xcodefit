@@ -5,7 +5,7 @@
 <p align="center"><strong>A little fitter. A lighter Xcode.</strong></p>
 <p align="center">Understand what Xcode stores. Choose what to keep.</p>
 <p align="center">
-  <a href="https://xnu.app/xcodefit/">Website</a> ·
+  <a href="https://atomsprout.com/xcodefit/">Website</a> ·
   <a href="https://github.com/everettjf/homebrew-tap/releases?q=xcodefit&amp;expanded=true">Download</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="CONTRIBUTING.md">Contribute</a>

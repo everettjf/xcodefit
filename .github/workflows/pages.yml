@@ -29,6 +29,8 @@ jobs:
       - uses: actions/checkout@v6
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Redirect legacy website to AtomSprout
+        run: python3 scripts/redirect-legacy-site.py web xcodefit
       - name: Upload static website
         uses: actions/upload-pages-artifact@v4
         with:
