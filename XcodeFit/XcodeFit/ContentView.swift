@@ -139,7 +139,10 @@ struct SidebarView: View {
                 Button { model.settingsPresented = true } label: { Image(systemName: "gearshape") }.buttonStyle(.plain).help(L10n.text("Settings"))
             }.padding(16)
         }
-        .onChange(of: model.destination) { _, _ in model.search = ""; model.focusedID = nil }
+        .onChange(of: model.destination) { _, destination in
+            model.search = ""; model.focusedID = nil
+            if destination == .cleanup && model.selected.isEmpty { model.applyRecommendations() }
+        }
     }
 }
 
@@ -191,16 +194,7 @@ struct OverviewView: View {
                 }
                 .padding(23)
                 .overlay(RoundedRectangle(cornerRadius: 22).strokeBorder(FitPalette.border))
-                HStack(spacing: 14) {
-                    Image(systemName: "sparkles").foregroundStyle(FitPalette.accent).font(.system(size: 23)).padding(10)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(L10n.text("A cleaner development environment, on your terms.")).font(.system(size: 13, weight: .medium))
-                        Text(L10n.text("Standard or Deep. Review every cleanup before it runs.")) .font(.system(size: 11)).foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    Button(L10n.text("Choose a Cleanup")) { model.navigate(.cleanup) }.buttonStyle(.borderedProminent).controlSize(.regular)
-                }.padding(16)
-                    .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(FitPalette.border))
+                QuickActionsCard()
                 VStack(alignment: .leading, spacing: 13) {
                     HStack {
                         Text(L10n.text("Storage Breakdown")).font(.system(size: 14, weight: .semibold))
@@ -229,6 +223,58 @@ struct OverviewView: View {
                     .font(.system(size: 11)).foregroundStyle(.secondary)
             }.padding(30).frame(maxWidth: 1100, alignment: .leading).frame(maxWidth: .infinity)
         }
+    }
+}
+
+/// The two one-click paths: clean recommended files now, or review a Deep Clean.
+struct QuickActionsCard: View {
+    @Environment(AppModel.self) private var model
+    private var ready: Bool { model.canClean }
+    private var title: String {
+        if model.isScanning { return L10n.text("Finding files that are safe to clean…") }
+        if !ready { return L10n.text("Scan to see what can be cleaned") }
+        return model.quickCleanItems.isEmpty ? L10n.text("Nothing to clean right now") : L10n.text("%@ ready to clean", StorageFormatting.bytes(model.quickCleanBytes))
+    }
+    private var detail: String {
+        switch model.pendingAction {
+        case .quickClean: return L10n.text("Cleaning starts automatically when the scan finishes.")
+        case .deepReview: return L10n.text("The review opens automatically when the scan finishes.")
+        case nil: break
+        }
+        if ready && model.quickCleanItems.isEmpty { return L10n.text("Use Deep Clean to review archives, simulators, and old tools.") }
+        return L10n.text("Caches, old logs, and idle builds move to Trash. Archives, simulators, and release symbols are kept.")
+    }
+    private var quickLabel: String {
+        if model.isScanning { return model.pendingAction == .quickClean ? L10n.text("Cancel Auto Clean") : L10n.text("Clean When Scan Finishes") }
+        return ready ? L10n.text("Clean Now") : L10n.text("Scan & Clean")
+    }
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 14) {
+                Image(systemName: "sparkles").foregroundStyle(FitPalette.accent).font(.system(size: 23)).padding(10)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title).font(.system(size: 15, weight: .semibold)).monospacedDigit()
+                    Text(detail).font(.system(size: 11)).foregroundStyle(.secondary)
+                }
+                Spacer(minLength: 10)
+                Button(L10n.text("Deep Clean & Review…")) { model.deepReview() }
+                    .controlSize(.large).disabled(model.isCleaning)
+                Button(quickLabel) { model.quickClean() }
+                    .buttonStyle(.borderedProminent).controlSize(.large).keyboardShortcut(.defaultAction)
+                    .disabled(model.isCleaning || (ready && !model.isScanning && (model.quickCleanItems.isEmpty || !model.canExecuteCleanup)))
+            }
+            if model.toolsBlockCleanup {
+                HStack {
+                    Label(model.environment.toolsBusy ? L10n.text("Development tools detected: %@. Close them, then refresh to enable cleanup.", model.environment.runningTools.joined(separator: ", ")) : L10n.text("Development-tool status is unknown. Cleanup is paused."), systemImage: "pause.circle")
+                        .font(.system(size: 11)).foregroundStyle(.orange)
+                    Spacer(minLength: 0)
+                    Button(model.refreshingTools ? L10n.text("Refreshing…") : L10n.text("Refresh Status")) { model.refreshToolState() }
+                        .controlSize(.small).disabled(model.isCleaning || model.refreshingTools)
+                }
+            }
+        }
+        .padding(16)
+        .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(FitPalette.border))
     }
 }
 

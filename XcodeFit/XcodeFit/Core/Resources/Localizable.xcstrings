@@ -217,42 +217,6 @@
       },
       "generatesSymbol": false
     },
-    "A cleaner development environment, on your terms.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A cleaner development environment, on your terms."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "按你的节奏，整理开发环境"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "依照你的步調，整理開發環境。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自分のペースで、開発環境をすっきりと。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "내 방식대로 정리하는 개발 환경."
-          }
-        }
-      },
-      "generatesSymbol": false
-    },
     "A simulator is running.": {
       "extractionState": "manual",
       "localizations": {
@@ -1940,42 +1904,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "폴더 선택…"
-          }
-        }
-      },
-      "generatesSymbol": false
-    },
-    "Choose a Cleanup": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choose a Cleanup"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "选择清理方案"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "選擇清理方案"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "クリーンアップを選択"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "정리 방법 선택"
           }
         }
       },
@@ -5072,42 +5000,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "아직 항목 없음"
-          }
-        }
-      },
-      "generatesSymbol": false
-    },
-    "No automatic cleanup, forced app termination, or emptying Trash. Retention rules affect recommendations; review is always required.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No automatic cleanup, forced app termination, or emptying Trash. Retention rules affect recommendations; review is always required."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "不自动清理，不强制退出开发工具，不清空系统废纸篓。保留规则影响推荐项；具体操作仍需检查确认。"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "不自動清理、不強制結束開發工具，也不清空垃圾桶。保留規則會影響建議項目；每次操作仍須檢查確認。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動クリーンアップ、アプリの強制終了、ゴミ箱を空にする操作は行いません。保持ルールは推奨項目に反映されますが、毎回確認が必要です。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자동 정리, 앱 강제 종료, 휴지통 비우기를 수행하지 않습니다. 보관 규칙은 추천 항목에 반영되며 항상 검토가 필요합니다."
           }
         }
       },
@@ -10621,42 +10513,6 @@
         }
       }
     },
-    "Standard or Deep. Review every cleanup before it runs.": {
-      "extractionState": "manual",
-      "generatesSymbol": false,
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard or Deep. Review every cleanup before it runs."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "常规或深度，每次清理前均可审阅。"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一般或深度，每次清理前均可檢閱。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "標準または詳細。実行前に毎回確認できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "표준 또는 심층. 실행 전 모든 정리 내용을 검토합니다."
-          }
-        }
-      }
-    },
     "Manage Archives…": {
       "extractionState": "manual",
       "generatesSymbol": false,
@@ -12326,6 +12182,582 @@
           "stringUnit": {
             "state": "translated",
             "value": "발견한 항목: %@"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "%@ identified · %@ ready to clean": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ identified · %@ ready to clean"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已识别 %@ · 可清理 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已辨識 %@ · 可清理 %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ を識別 · %@ をクリーン可能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 식별됨 · %@ 정리 가능"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "%@ ready to clean": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ready to clean"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可清理 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可清理 %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ をクリーン可能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 정리 가능"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Caches, old logs, and idle builds move to Trash. Archives, simulators, and release symbols are kept.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caches, old logs, and idle builds move to Trash. Archives, simulators, and release symbols are kept."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存、旧日志和闲置构建将移到废纸篓。归档、模拟器和发布符号会保留。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快取、舊記錄和閒置建置將移到垃圾桶。封存、模擬器和發佈符號會保留。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャッシュ、古いログ、未使用のビルドをゴミ箱に移動します。アーカイブ、シミュレータ、リリースシンボルは保持されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "캐시, 오래된 로그, 사용하지 않는 빌드를 휴지통으로 이동합니다. 아카이브, 시뮬레이터, 릴리스 심볼은 유지됩니다."
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Cancel Auto Clean": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel Auto Clean"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消自动清理"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消自動清理"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動クリーンをキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동 정리 취소"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Clean Now": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean Now"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即清理"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即清理"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今すぐクリーン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 정리"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Clean When Scan Finishes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean When Scan Finishes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描完成后自动清理"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃描完成後自動清理"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキャン完了後に自動クリーン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스캔 완료 후 자동 정리"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Cleaning starts automatically when the scan finishes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleaning starts automatically when the scan finishes."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描完成后将自动开始清理。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃描完成後將自動開始清理。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキャンが完了すると自動的にクリーンを開始します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스캔이 끝나면 자동으로 정리를 시작합니다."
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Cleanup complete": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleanup complete"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理完成"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理完成"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリーンアップ完了"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정리 완료"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Deep Clean & Review…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep Clean & Review…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深度清理并确认…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深度清理並確認…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ディープクリーンを確認…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "심층 정리 및 검토…"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Finding files that are safe to clean…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finding files that are safe to clean…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在查找可安全清理的文件…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在尋找可安全清理的檔案…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全にクリーンできるファイルを検索中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "안전하게 정리할 수 있는 파일을 찾는 중…"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "No forced app termination or emptying Trash. Quick Clean only moves recommended files to Trash; Deep Clean always requires review.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No forced app termination or emptying Trash. Quick Clean only moves recommended files to Trash; Deep Clean always requires review."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不会强制退出应用，也不会清空废纸篓。一键清理只把推荐项目移到废纸篓；深度清理始终需要确认。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不會強制結束 App，也不會清空垃圾桶。一鍵清理只會將建議項目移到垃圾桶；深度清理一律需要確認。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリの強制終了やゴミ箱の消去は行いません。クイッククリーンは推奨項目をゴミ箱に移動するだけで、ディープクリーンは必ず確認が必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱을 강제 종료하거나 휴지통을 비우지 않습니다. 빠른 정리는 권장 항목만 휴지통으로 이동하며, 심층 정리는 항상 검토가 필요합니다."
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Nothing to clean right now": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing to clean right now"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目前没有需要清理的内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目前沒有需要清理的內容"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在クリーンする項目はありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금은 정리할 항목이 없습니다"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Scan & Clean": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan & Clean"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描并清理"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃描並清理"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキャンしてクリーン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스캔 후 정리"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Scan to see what can be cleaned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan to see what can be cleaned"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描后即可查看可清理内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃描後即可查看可清理內容"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキャンしてクリーン可能な項目を確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스캔하여 정리할 수 있는 항목 확인"
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "The review opens automatically when the scan finishes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The review opens automatically when the scan finishes."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描完成后将自动打开确认清单。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃描完成後將自動打開確認清單。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキャンが完了すると確認画面が自動的に開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스캔이 끝나면 검토 화면이 자동으로 열립니다."
+          }
+        }
+      },
+      "generatesSymbol": false
+    },
+    "Use Deep Clean to review archives, simulators, and old tools.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use Deep Clean to review archives, simulators, and old tools."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可使用深度清理检查归档、模拟器和旧工具。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可使用深度清理檢查封存、模擬器和舊工具。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ディープクリーンでアーカイブ、シミュレータ、古いツールを確認できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "심층 정리로 아카이브, 시뮬레이터, 오래된 도구를 검토할 수 있습니다."
           }
         }
       },

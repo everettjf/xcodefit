@@ -22,6 +22,10 @@ import AppKit
             CommandMenu(L10n.text("Scan")) {
                 Button(L10n.text("Rescan")) { model.startScan() }.keyboardShortcut("r", modifiers: .command).disabled(model.isScanning || model.isCleaning)
                 Button(L10n.text("Stop Scan")) { model.cancelScan() }.disabled(!model.isScanning)
+                Divider()
+                Button(L10n.text("Quick Clean")) { model.quickClean() }.keyboardShortcut("k", modifiers: [.command, .shift]).disabled(model.isCleaning)
+                Button(L10n.text("Deep Clean & Review…")) { model.deepReview() }.disabled(model.isCleaning)
+                Divider()
                 #if DEBUG
                 Button(L10n.text("Test folders · Not actual developer data")) { model.useTestFolders() }.disabled(model.isScanning || model.isCleaning)
                 Divider()

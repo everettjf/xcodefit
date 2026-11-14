@@ -241,7 +241,7 @@ struct PreferencesView: View {
                 Section(L10n.text("Cleanup Methods")) {
                     LabeledContent(L10n.text("Regular Files"), value: L10n.text("Move to Trash"))
                     LabeledContent(L10n.text("Devices & Runtimes"), value: L10n.text("Apple simctl · Explicit confirmation"))
-                    Text(L10n.text("No automatic cleanup, forced app termination, or emptying Trash. Retention rules affect recommendations; review is always required.")) .font(.system(size: 11)).foregroundStyle(.secondary)
+                    Text(L10n.text("No forced app termination or emptying Trash. Quick Clean only moves recommended files to Trash; Deep Clean always requires review.")) .font(.system(size: 11)).foregroundStyle(.secondary)
                 }
             }.formStyle(.grouped)
             HStack { Spacer(); Button(L10n.text("Done")) { model.settingsPresented = false; dismiss(); model.saveSettings(language: pendingLanguage) }.keyboardShortcut(.defaultAction).disabled(model.isCleaning) }

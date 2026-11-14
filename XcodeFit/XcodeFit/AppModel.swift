@@ -1,6 +1,7 @@
 import SwiftUI
 import AppKit
 import Observation
+import UserNotifications
 
 @MainActor @Observable
 final class AppModel {
@@ -53,6 +54,10 @@ final class AppModel {
     var scanTask: Task<ScanSnapshot, Never>?
     var cleanupTask: Task<[CleanupRecord], Never>?
     var scanID = UUID()
+    /// A one-click action the user armed while a scan was still running.
+    enum PendingAction { case quickClean, deepReview }
+    var pendingAction: PendingAction?
+    private var notifyWhenScanFinishes = true
     enum Sort: String, CaseIterable, Identifiable {
         case size, name, date
         var id: String { rawValue }
@@ -123,8 +128,34 @@ final class AppModel {
     func count(_ category: StorageCategory) -> Int { items.filter { $0.category == category }.count }
     func size(_ category: StorageCategory) -> Int64 { items.filter { $0.category == category }.reduce(0) { $0 + $1.size } }
     func navigate(_ destination: Destination) { self.destination = destination; focusedID = nil; search = "" }
-    func startScan() {
+    /// Quick Clean covers only recommended Standard items that move to Trash.
+    var quickCleanItems: [StorageItem] {
+        items.filter { $0.action == .trash && CleanupPolicy.recommended($0, tier: .regular, settings: settings, protectedPaths: protectedPaths) }
+    }
+    var quickCleanBytes: Int64 { quickCleanItems.reduce(0) { $0 + $1.size } }
+    var toolsBlockCleanup: Bool { snapshot != nil && !isScanning && (environment.toolsBusy || !environment.processStateKnown) }
+    /// Cleans recommended Standard items without a review step. While a scan is
+    /// running, the request is armed and runs when the scan completes.
+    func quickClean() {
+        guard !isCleaning else { return }
+        if isScanning { pendingAction = pendingAction == .quickClean ? nil : .quickClean; return }
+        guard canClean else { pendingAction = .quickClean; startScan(); return }
+        let candidates = quickCleanItems
+        guard canExecuteCleanup, !candidates.isEmpty else { return }
+        tier = .regular; selected = []
+        executePlan(CleanupPlan(tier: .regular, items: candidates.sorted { $0.id < $1.id }))
+    }
+    /// Opens Deep Clean with recommendations selected and the review sheet presented.
+    func deepReview() {
+        guard !isCleaning else { return }
+        if isScanning { pendingAction = pendingAction == .deepReview ? nil : .deepReview; return }
+        guard canClean else { pendingAction = .deepReview; startScan(); return }
+        navigate(.cleanup); tier = .deep; applyRecommendations(); review()
+    }
+    func startScan(notify: Bool = true) {
         guard !isScanning && !isCleaning else { return }
+        notifyWhenScanFinishes = notify
+        if notify { Notifier.requestAuthorization() }
         isScanning = true; progress = L10n.text("Inspecting development environment…"); scannedCount = 0; selected = []; items = []; focusedID = nil
         let identifier = UUID(); scanID = identifier
         var configuration = ScanConfiguration(); configuration.customRoots = customRoots; configuration.keepDeviceSupportVersions = settings.keepDeviceSupportVersions
@@ -156,9 +187,16 @@ final class AppModel {
             self.snapshot = result; self.items = result.items; self.isScanning = false; self.scanTask = nil
             self.progress = result.cancelled ? L10n.text("Scan canceled. Results are incomplete.") : L10n.text("Scan complete")
             self.updateCapacity()
+            let pending = self.pendingAction; self.pendingAction = nil
+            guard !result.cancelled else { return }
+            if pending == .quickClean, self.canExecuteCleanup, !self.quickCleanItems.isEmpty { self.quickClean(); return }
+            if self.notifyWhenScanFinishes {
+                Notifier.post(title: L10n.text("Scan complete"), body: L10n.text("%@ identified · %@ ready to clean", StorageFormatting.bytes(self.total), StorageFormatting.bytes(self.quickCleanBytes)))
+            }
+            if pending == .deepReview { self.deepReview() }
         }
     }
-    func cancelScan() { scanTask?.cancel(); progress = L10n.text("Canceling…") }
+    func cancelScan() { pendingAction = nil; scanTask?.cancel(); progress = L10n.text("Canceling…") }
     func refreshToolState() {
         guard !isScanning, !isCleaning, !refreshingTools, snapshot != nil else { return }
         refreshingTools = true
@@ -188,7 +226,7 @@ final class AppModel {
         canClean && CleanupPolicy.recommended(item, tier: tier, settings: settings, protectedPaths: protectedPaths)
     }
     func applyRecommendations() { selected = Set(items.filter { recommended($0) }.map(\.id)) }
-    func changeTier(_ value: CleanupTier) { tier = value; selected = [] }
+    func changeTier(_ value: CleanupTier) { tier = value; applyRecommendations() }
     func toggleSelection(_ item: StorageItem) {
         if selected.contains(item.id) { selected.remove(item.id) }
         else if selectionBlockReason(item) == nil { selected.insert(item.id) }
@@ -221,7 +259,9 @@ final class AppModel {
             self.results = records; self.selected = []; self.isCleaning = false; self.cleanupTask = nil
             self.updateCapacity()
             if let before = self.capacityBeforeCleanup { self.capacityChange = self.availableBytes - before }
-            self.startScan()
+            let done = records.filter { $0.outcome == .trashed || $0.outcome == .removed }
+            Notifier.post(title: L10n.text("Cleanup complete"), body: L10n.text("Items: %@ · %@", String(done.count), StorageFormatting.bytes(done.reduce(0) { $0 + $1.bytes })))
+            self.startScan(notify: false)
         }
     }
     func cancelCleanup() { cleanupTask?.cancel(); progress = L10n.text("Stopping after the current item…") }
@@ -259,4 +299,18 @@ final class AppModel {
     }
     private func decode<T: Decodable>(_ type: T.Type, key: String) -> T? { defaults.data(forKey: "XcodeFit." + key).flatMap { try? JSONDecoder().decode(type, from: $0) } }
     private func save<T: Encodable>(_ value: T, key: String) { if let data = try? JSONEncoder().encode(value) { defaults.set(data, forKey: "XcodeFit." + key) } }
+}
+
+/// System notifications for work that finishes while XcodeFit is in the background.
+@MainActor enum Notifier {
+    // Command-line test hosts have no bundle and cannot use the notification center.
+    private static var center: UNUserNotificationCenter? { Bundle.main.bundleIdentifier == nil ? nil : .current() }
+    static func requestAuthorization() {
+        center?.requestAuthorization(options: [.alert, .sound]) { _, _ in }
+    }
+    static func post(title: String, body: String) {
+        guard let center, !NSApp.isActive else { return }
+        let content = UNMutableNotificationContent(); content.title = title; content.body = body; content.sound = .default
+        center.add(UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil))
+    }
 }
