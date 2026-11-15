@@ -100,6 +100,6 @@ Keep release numbers and versioned ZIP paths out of the README and website. Down
 
 ## Website
 
-The product website lives in the shared AtomSprout site repository (`atomsprout/atomsprout.github.io`, under `software-sites/xcodefit/`) and is published at <https://atomsprout.com/xcodefit/>. Edit, preview, and deploy it there.
+The product website lives in `web/` in this repository and is published at <https://asp.run/xcodefit/>. It is plain static HTML, CSS, and JavaScript; open `web/index.html` in a browser to preview it.
 
-This repository's GitHub Pages workflow only publishes a redirect from the legacy address to the AtomSprout page. README screenshots and the app icon are in `docs/assets/`.
+The GitHub Pages workflow (`.github/workflows/pages.yml`) deploys `web/` on every push to `main` that touches it. The website keeps its own images in `web/assets/`; README screenshots and the app icon are in `docs/assets/`.

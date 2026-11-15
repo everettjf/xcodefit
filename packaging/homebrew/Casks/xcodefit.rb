@@ -8,7 +8,7 @@ cask "xcodefit" do
   url "https://github.com/everettjf/homebrew-tap/releases/download/xcodefit-v#{version}/XcodeFit-#{version}#{arch}.zip"
   name "XcodeFit"
   desc "Give Xcode storage a checkup and clean with care"
-  homepage "https://atomsprout.com/xcodefit/"
+  homepage "https://asp.run/xcodefit/"
 
   livecheck do
     url :url
