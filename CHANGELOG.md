@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.10 — build 14
+
+- Add **Clean Now** to Overview: recommended Standard items (caches, old logs, idle builds) move to Trash in one click, without a review sheet. Archives, simulators, and release symbols are never included.
+- Add **Deep Clean & Review…**, which opens Deep Clean with recommendations selected and the review sheet presented.
+- Either action can be armed while a scan is running and starts when the scan finishes. Stop Scan disarms it.
+- Post a system notification when a scan or cleanup finishes while XcodeFit is in the background.
+- Preselect recommendations when opening Clean Up or changing the cleanup tier.
+- Cleanup is still blocked while Xcode or other development tools are running, and every item is rechecked before it is moved.
+
 ## 1.0.8 — build 12
 
 - Make the entire Standard Clean and Deep Clean cards clickable.
