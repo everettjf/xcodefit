@@ -100,13 +100,6 @@ Keep release numbers and versioned ZIP paths out of the README and website. Down
 
 ## Website
 
-The product website is a dependency-free static site in `web/`. GitHub Actions deploys only that directory to GitHub Pages when its contents change on `main`. To preview locally:
+The product website lives in the shared AtomSprout site repository (`atomsprout/atomsprout.github.io`, under `software-sites/xcodefit/`) and is published at <https://atomsprout.com/xcodefit/>. Edit, preview, and deploy it there.
 
-```sh
-python3 -m http.server 8080 --directory web
-```
-
-The website follows the system light/dark appearance automatically using CSS, including live preference changes without a reload. Both themes include the product preview, installation command, and browser theme colors.
-
-The interactive product preview uses illustrative data; it never scans a visitor’s computer. The website loads no third-party scripts, fonts, or analytics.
-
+This repository's GitHub Pages workflow only publishes a redirect from the legacy address to the AtomSprout page. README screenshots and the app icon are in `docs/assets/`.

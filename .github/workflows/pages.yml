@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'web/**'
+      - 'scripts/redirect-legacy-site.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -30,11 +30,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Redirect legacy website to AtomSprout
-        run: python3 scripts/redirect-legacy-site.py web xcodefit
+        run: |
+          mkdir -p site && : > site/index.html
+          python3 scripts/redirect-legacy-site.py site xcodefit
       - name: Upload static website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: web
+          path: site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

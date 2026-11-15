@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="web/assets/app-icon.png" width="88" height="88" alt="XcodeFit’s smiling claw-hammer mascot">
+  <img src="docs/assets/app-icon.png" width="88" height="88" alt="XcodeFit’s smiling claw-hammer mascot">
 </p>
 <h1 align="center">XcodeFit</h1>
 <p align="center"><strong>A little fitter. A lighter Xcode.</strong></p>
@@ -16,9 +16,9 @@
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="web/assets/screenshots/overview-dark.jpg">
-  <source media="(prefers-color-scheme: light)" srcset="web/assets/screenshots/overview-light.jpg">
-  <img src="web/assets/screenshots/overview-light.jpg" alt="XcodeFit overview showing storage by category, folder sizes, scan coverage, and cleanup access" width="1260">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/screenshots/overview-dark.jpg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/screenshots/overview-light.jpg">
+  <img src="docs/assets/screenshots/overview-light.jpg" alt="XcodeFit overview showing storage by category, folder sizes, scan coverage, and cleanup access" width="1260">
 </picture>
 
 <p align="center"><sub>Real native interface, shown with isolated test folders. Screenshot follows light/dark appearance; example sizes are not cleanup results.</sub></p>
@@ -63,9 +63,9 @@ Already using XcodeSize? Follow the [migration guide](docs/UPGRADING.md) to carr
 A visible banner shows the current item and discovered item count on every page. Stop the scan at any time; partial results are labeled. The scan does not display a percentage because its total scope is not known in advance.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="web/assets/screenshots/scanning-dark.jpg">
-  <source media="(prefers-color-scheme: light)" srcset="web/assets/screenshots/scanning-light.jpg">
-  <img src="web/assets/screenshots/scanning-light.jpg" alt="XcodeFit scanning test folders with the scan status banner, item count, and Stop Scan button" width="1100" loading="lazy">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/screenshots/scanning-dark.jpg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/screenshots/scanning-light.jpg">
+  <img src="docs/assets/screenshots/scanning-light.jpg" alt="XcodeFit scanning test folders with the scan status banner, item count, and Stop Scan button" width="1100" loading="lazy">
 </picture>
 
 <sub>Real Debug capture with isolated test folders and scan events slowed for capture. Item counts are not a percentage or a speed measurement.</sub>
@@ -80,9 +80,9 @@ A visible banner shows the current item and discovered item count on every page.
 | Before cleanup | Review the exact selection | Review the exact selection |
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="web/assets/screenshots/cleanup-dark.jpg">
-  <source media="(prefers-color-scheme: light)" srcset="web/assets/screenshots/cleanup-light.jpg">
-  <img src="web/assets/screenshots/cleanup-light.jpg" alt="XcodeFit cleanup screen with Standard and Deep modes, selectable items, and a separate review action" width="1260" loading="lazy">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/screenshots/cleanup-dark.jpg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/screenshots/cleanup-light.jpg">
+  <img src="docs/assets/screenshots/cleanup-light.jpg" alt="XcodeFit cleanup screen with Standard and Deep modes, selectable items, and a separate review action" width="1260" loading="lazy">
 </picture>
 
 <sub>Cleanup screen with isolated test folders. Choosing a mode does not execute cleanup.</sub>

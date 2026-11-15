@@ -1,6 +1,6 @@
 # XcodeFit artwork
 
-Original artwork was made with the built-in ImageGen tool for XcodeFit. Both images have transparent backgrounds. The app icon master is `xcodefit-icon-master.png`; the matching checkup hero is `../web/assets/checkup-mascot.png`. `swift Tools/GenerateIcon.swift` exports the macOS icon size set without altering the master illustration. The web icon is a 512px raster size variant.
+Original artwork was made with the built-in ImageGen tool for XcodeFit. Both images have transparent backgrounds. The app icon master is `xcodefit-icon-master.png`; the matching checkup hero is `checkup-mascot.png`. `swift Tools/GenerateIcon.swift` exports the macOS icon size set without altering the master illustration. The web icon is a 512px raster size variant.
 
 ## Icon prompt
 

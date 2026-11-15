@@ -29,7 +29,7 @@ For a substantial scanner or cleanup redesign, open an issue with examples befor
 
 ## Documentation and screenshots
 
-The README and website share screenshots in `web/assets/screenshots/`. Keep matching light/dark images at the same dimensions and use real app captures with isolated test folders. Preserve the visible test-data label, and never present sample sizes as real cleanup results.
+The README and website share screenshots in `docs/assets/screenshots/`. Keep matching light/dark images at the same dimensions and use real app captures with isolated test folders. Preserve the visible test-data label, and never present sample sizes as real cleanup results.
 
 Website previews and release preparation are documented in [DEVELOPMENT.md](docs/DEVELOPMENT.md). A documentation-only change does not require rebuilding or republishing the app.
 
