@@ -23,7 +23,7 @@
 
 <p align="center"><sub>Real native interface, shown with isolated test folders. Screenshot follows light/dark appearance; example sizes are not cleanup results.</sub></p>
 
-XcodeFit is a free, open-source macOS app for browsing and cleaning Xcode-related storage. See where space goes, learn what each folder does, protect what matters, and review every cleanup before it runs.
+XcodeFit is a free, open-source macOS app for browsing and cleaning Xcode-related storage. See where space goes, learn what each folder does, protect what matters, and clean up in one click or review first.
 
 Built with **SwiftUI, AppKit, and Foundation**. No third-party runtime dependencies.
 
